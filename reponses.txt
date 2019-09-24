@@ -1,0 +1,5 @@
+5)
+Mettre à jour localement : git pull
+Mettre à jour le répertoire : git add .
+git commit -m "..."
+git push
