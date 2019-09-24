@@ -1,3 +1,0 @@
-Question 5
-
-Pour mettre à jour : git pull
