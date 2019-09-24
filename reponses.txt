@@ -10,3 +10,6 @@ sur eclipse :
 clic droit sur le fichier modifier :
 Add to index
 puis clic droit sur le dossier -> commit -> commit and push
+
+
+MAVEN : description du projet + outil de build + gère les dépendences
