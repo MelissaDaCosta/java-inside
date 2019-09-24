@@ -5,5 +5,5 @@ jdk: openjdk13
 
 
 script:
-        - cd lab1
-        - pvn package
+  - cd lab1
+  - mvn package
