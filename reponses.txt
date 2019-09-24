@@ -3,3 +3,10 @@ Mettre à jour localement : git pull
 Mettre à jour le répertoire : git add .
 git commit -m "..."
 git push
+
+
+
+sur eclipse :
+clic droit sur le fichier modifier :
+Add to index
+puis clic droit sur le dossier -> commit -> commit and push
