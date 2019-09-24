@@ -3,10 +3,8 @@ jdk: openjdk13
 
 matrix:
   include:
-    -os: linux
-    -os: osx
-    -os: windows
-
+    - os: linux
+    - os: osx
 
 script:
   - cd lab1
