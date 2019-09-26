@@ -7,5 +7,6 @@ matrix:
     - os: osx
 
 script:
+  - cd TP01
   - cd lab1
   - mvn package
