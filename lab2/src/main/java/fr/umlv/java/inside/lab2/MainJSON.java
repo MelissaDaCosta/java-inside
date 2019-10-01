@@ -61,7 +61,8 @@ public class MainJSON {
 				.filter(method->method.getName().startsWith("get"))
 				// Indique comment trier
 				// getDeclaringClass donne le type de retour, on ne veut pas qu'il soit egal à Object.class
-				.filter(Predicate.not(method->method.getDeclaringClass().equals(Object.class)))
+				//.filter(Predicate.not(method->method.getDeclaringClass().equals(Object.class)))
+				.filter(method->method.isAnnotationPresent(JSONProperty.class))
 				.sorted(Comparator.comparing(Method::getName))
 				.map(method->{
 					var property = propertyName(method.getName());
