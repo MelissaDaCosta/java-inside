@@ -68,7 +68,7 @@ public class MainJSON {
 					var res =callInvoke(object, method);
 					return "\""+property +"\"" + " : " + "\"" + res + "\"";
 				})				
-				.collect(joining(", ", "{", "}"));
+				.collect(joining(", ", "{", "}")); 
 	}
 
 	public static void main(String[] args) {
