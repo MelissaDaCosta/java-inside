@@ -1,12 +1,14 @@
 language: java
 jdk: openjdk13
 
+env:
+  - FOLDER=TP02
+
 matrix:
   include:
     - os: linux
     - os: osx
 
 script:
-  - cd TP01
-  - cd lab1
+  - cd FOLDER
   - mvn package

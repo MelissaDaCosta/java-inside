@@ -7,8 +7,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.function.Predicate;
 
-public class Main {
+public class MainJSON {
 
 	private static String propertyName(String name) {
 		return Character.toLowerCase(name.charAt(3)) + name.substring(4);
@@ -57,6 +59,10 @@ public class Main {
 					*/
 		return Arrays.stream(object.getClass().getMethods())
 				.filter(method->method.getName().startsWith("get"))
+				// Indique comment trier
+				// getDeclaringClass donne le type de retour, on ne veut pas qu'il soit egal à Object.class
+				.filter(Predicate.not(method->method.getDeclaringClass().equals(Object.class)))
+				.sorted(Comparator.comparing(Method::getName))
 				.map(method->{
 					var property = propertyName(method.getName());
 					var res =callInvoke(object, method);
@@ -66,8 +72,7 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		var person = new Person("John", "Doe");
-		System.out.println(toJSON(person));
+		
 		
 	}
 }
