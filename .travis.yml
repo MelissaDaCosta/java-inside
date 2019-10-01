@@ -4,11 +4,11 @@ jdk: openjdk13
 matrix:
   include:
     - os: linux
-    env:
-      - FOLDER=lab1
+      env:
+        - FOLDER=lab1
     - os: osx
-    env:
-      - FOLDER=lab2
+      env:
+        - FOLDER=lab2
 
 script:
     - cd $FOLDER
