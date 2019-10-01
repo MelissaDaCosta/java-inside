@@ -1,13 +1,14 @@
 language: java
 jdk: openjdk13
 
-env:
-  - FOLDER=TP02
-
 matrix:
   include:
     - os: linux
+    env:
+      - FOLDER=lab2
     - os: osx
+    env:
+      - FOLDER=lab2
 
 script:
     - cd $FOLDER
