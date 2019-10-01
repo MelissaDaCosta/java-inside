@@ -5,7 +5,7 @@ matrix:
   include:
     - os: linux
     env:
-      - FOLDER=lab2
+      - FOLDER=lab1
     - os: osx
     env:
       - FOLDER=lab2
