@@ -46,17 +46,26 @@ public class TestJSON {
 			return firstName;
 		}
 
-		@JSONProperty()
+		@JSONProperty("salut")
 		public String getLastName() {
 			return lastName;
 		}
 	}
 
 	@Test
-	public void testReturn() {
+	public void testReturnPerson() {
 		var person = new Person("John", "Doe");
+		System.out.println(MainJSON.toJSON(person));
 		var expected = "{\"firstName\" : \"John\", \"lastName\" : \"Doe\"}";
 		assertEquals(expected, MainJSON.toJSON(person));
+
+	}
+	
+	@Test
+	public void testReturnAlien() {
+		var alien = new Alien("Mars", 21);
+		var expected = "{\"age\" : \"21\", \"planet\" : \"Mars\"}";
+		assertEquals(expected, MainJSON.toJSON(alien));
 
 	}
 	

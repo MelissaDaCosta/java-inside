@@ -65,7 +65,10 @@ public class MainJSON {
 				.filter(method->method.isAnnotationPresent(JSONProperty.class))
 				.sorted(Comparator.comparing(Method::getName))
 				.map(method->{
-					var property = propertyName(method.getName());
+					
+					var valueAnnotation = method.getAnnotation(JSONProperty.class).value();
+					// Si la value a été remplie on prend sa valeur, sinon on prend la valeur de propertyName
+					var property = valueAnnotation.isEmpty() ? propertyName(method.getName()) : valueAnnotation;
 					var res =callInvoke(object, method);
 					return "\""+property +"\"" + " : " + "\"" + res + "\"";
 				})				
