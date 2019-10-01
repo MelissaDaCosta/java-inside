@@ -10,5 +10,5 @@ matrix:
     - os: osx
 
 script:
-  - cd FOLDER
+  - cd $FOLDER
   - mvn package
