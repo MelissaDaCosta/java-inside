@@ -20,13 +20,13 @@ public class TestJSON {
 			this.age = age;
 		}
 
-		@JSONProperty()	// Clé du JSON automatiquement planet
+		@JSONProperty("planet")	// Valeur de l'annotation = planet
 		public String getPlanet() {
 			return planet;
 		}
 
 		
-		@JSONProperty()
+		@JSONProperty("age")
 		public int getAge() {
 			return age;
 		}
@@ -41,12 +41,12 @@ public class TestJSON {
 			this.lastName = Objects.requireNonNull(lastName);
 		}
 
-		@JSONProperty()
+		@JSONProperty("firstName")
 		public String getFirstName() {
 			return firstName;
 		}
 
-		@JSONProperty("salut")
+		@JSONProperty("lastName")
 		public String getLastName() {
 			return lastName;
 		}
@@ -64,12 +64,13 @@ public class TestJSON {
 	@Test
 	public void testReturnAlien() {
 		var alien = new Alien("Mars", 21);
+		System.out.println(MainJSON.toJSON(alien));
 		var expected = "{\"age\" : \"21\", \"planet\" : \"Mars\"}";
 		assertEquals(expected, MainJSON.toJSON(alien));
 
 	}
 	
-	@Test
+	
 	public void testIllegalArgumentException() {
 		assertThrows(IllegalArgumentException.class, ()->MainJSON.toJSON(new Alien("mars", -2)));
 
