@@ -103,10 +103,23 @@ public class ExampleTests {
 		
 		var lookup = MethodHandles.lookup();	
 		// Appelle la méthode equals de la classe String
-		// Retounr un boolean et prend un object
-		var methodHandleTest = lookup.findVirtual(String.class, "equals", methodType(Boolean.class, Object.class))
-				.invokeExact("foo", "test");
+		// Retoune un boolean et prend un object
+		var methodHandleTest = lookup.findVirtual(String.class, "equals", methodType(boolean.class, Object.class));
+
+		// Supprime les arguments des constantes renvoyés car nous n'avons pas besoin 
+		// des arguments String et Class rajouté par la méthodeHandleTest lors du guardWithTest 
+		var dropForTarget = MethodHandles.dropArguments(methodHandleTarget, 0, String.class, Object.class);
+		var dropForFallback = MethodHandles.dropArguments(methodHandleFallback, 0, String.class, Object.class);
 		
+		// Effectue le guardTest
+		var guardTest = MethodHandles.guardWithTest(methodHandleTest, dropForTarget, dropForFallback);
+		
+		// Donne comme argument la string sur laquelle la méthode equals va être effectué
+		var execution = MethodHandles.insertArguments(guardTest, 1, "foo");
+		
+		assertEquals(1, (int) execution.invokeExact("foo"));
+		
+		assertEquals(-1, (int) execution.invokeExact("pasfoo"));
 		
 	}
 }

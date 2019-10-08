@@ -10,6 +10,10 @@ matrix:
       env:
         - FOLDER=lab2
 
+     - os: linux
+      env:
+        - FOLDER=lab3
+
 script:
     - cd $FOLDER
     - mvn package
