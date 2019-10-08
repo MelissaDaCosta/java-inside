@@ -55,7 +55,7 @@ public class TestJSON {
 	@Test
 	public void testReturnPerson() {
 		var person = new Person("John", "Doe");
-		System.out.println(MainJSON.toJSON(person));
+		//System.out.println(MainJSON.toJSON(person));
 		var expected = "{\"firstName\" : \"John\", \"lastName\" : \"Doe\"}";
 		assertEquals(expected, MainJSON.toJSON(person));
 
@@ -64,7 +64,7 @@ public class TestJSON {
 	@Test
 	public void testReturnAlien() {
 		var alien = new Alien("Mars", 21);
-		System.out.println(MainJSON.toJSON(alien));
+		//System.out.println(MainJSON.toJSON(alien));
 		var expected = "{\"age\" : \"21\", \"planet\" : \"Mars\"}";
 		assertEquals(expected, MainJSON.toJSON(alien));
 
