@@ -11,11 +11,13 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+import fr.umlv.java.inside.lab2.TestJSON.Alien;
+
 public class MainJSON {
 
 	// 11. cache pour les méthodes
 	
-	/*
+	
 	
 	  private static final ClassValue<Method[]> cache =new ClassValue<>() { //
 	  //Redéfinie la méthode car ClassValue est une classe abstraite
@@ -23,10 +25,10 @@ public class MainJSON {
 	  @Override protected Method[] computeValue(Class<?> type) { return
 	  type.getMethods(); } };
 	 
-*/
-	// 12. cache pour le nom des propriétés
 
-	  
+	// 12. cache pour le nom des propriétés NON FONCTIONNELLE ?
+
+/*	  
 	private static final ClassValue<Map<Method, String>> cache =new ClassValue<>() {
 		Map<Method, String> mapCache = new HashMap<Method,String>();
 
@@ -50,7 +52,7 @@ public class MainJSON {
 		return mapCache;
 		}
 	};
-	
+	*/
 
 	private static String propertyName(String name) {
 		return Character.toLowerCase(name.charAt(3)) + name.substring(4);
@@ -118,7 +120,7 @@ public class MainJSON {
 		
 		// 11. Avec le cache pour les méthodes :
 		
-		/*
+		
 		return Arrays.stream(cache.get(object.getClass()))
 				.filter(method->method.getName().startsWith("get"))
 				// Indique comment trier
@@ -136,12 +138,12 @@ public class MainJSON {
 				})				
 				.collect(joining(", ", "{", "}"));
 				
-		*/
+		
 		// 12. cache pour le nom des propriétés
 		
-	
+	/*
 		var st = cache.get(object.getClass()).entrySet().stream();
-		System.out.println(cache.get(object.getClass()).entrySet());
+		//System.out.println(cache.get(object.getClass()).entrySet());
 		return 
 			st
 			.map(mapCache->{
@@ -151,7 +153,7 @@ public class MainJSON {
 				return "\""+mapCache.getValue() +"\"" + " : " + "\"" + res + "\"";
 				}).collect(joining(", ", "{", "}"));
 				
-				
+				*/
 	}
 
 	public static void main(String[] args) {
