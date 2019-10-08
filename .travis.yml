@@ -6,13 +6,11 @@ matrix:
     - os: linux
       env:
         - FOLDER=lab1
+        env:
+        - FOLDER=lab3
     - os: osx
       env:
         - FOLDER=lab2
-
-     - os: linux
-      env:
-        - FOLDER=lab3
 
 script:
     - cd $FOLDER
