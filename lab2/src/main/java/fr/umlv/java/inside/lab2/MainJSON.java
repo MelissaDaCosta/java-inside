@@ -11,8 +11,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import fr.umlv.java.inside.lab2.TestJSON.Alien;
-
 public class MainJSON {
 
 	// 11. cache pour les méthodes
