@@ -10,17 +10,20 @@ import java.lang.reflect.Method;
 
 import javax.print.attribute.IntegerSyntax;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class ExampleTests {
 
+	@Tag("Q3")
 	@Test
 	public void getAStaticHello() throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-		var method = Example.class.getDeclaredMethod("aStaticHello", int.class);
-		method.setAccessible(true);
+		var method = Example.class.getDeclaredMethod("aStaticHello", int.class);	// recupérer methode prive
+		method.setAccessible(true);	// sinon on ne peut pas l'appelée
 		assertEquals("question 1", method.invoke(null, 1));
 	}
 	
+	@Tag("Q3")
 	@Test
 	public void getAnInstanceHello() throws NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		var method = Example.class.getDeclaredMethod("anInstanceHello", int.class);
@@ -29,6 +32,7 @@ public class ExampleTests {
 
 	}
 	
+	@Tag("Q4")
 	@Test
 	public void callAStaticHello() throws Throwable {
 		var lookup = MethodHandles.lookup();	// donne le lookup courant
@@ -39,7 +43,7 @@ public class ExampleTests {
 		
 	}
 	
-	
+	@Tag("Q5")
 	@Test
 	public void callAnInstanceHello() throws Throwable  {
 		var lookup = MethodHandles.lookup();	// donne le lookup courant
@@ -49,6 +53,7 @@ public class ExampleTests {
 		
 	}
 	
+	@Tag("Q6")
 	@Test
 	public void anInstanceHelloInsertArgs() throws Throwable {
 		var lookup = MethodHandles.lookup();	// donne le lookup courant
@@ -59,6 +64,7 @@ public class ExampleTests {
 		assertEquals("question 6", (String) methodHandleInsert.invokeExact(new Example()));
 	}
 	
+	@Tag("Q7")
 	@Test
 	public void anInstanceHelloDropArguments() throws Throwable {
 		var lookup = MethodHandles.lookup();	// donne le lookup courant
@@ -72,6 +78,7 @@ public class ExampleTests {
 		
 	}
 
+	@Tag("Q10")
 	@Test
 	public void anInstanceHelloAsType() throws Throwable{
 		var lookup = MethodHandles.lookup();	// donne le lookup courant
@@ -86,6 +93,7 @@ public class ExampleTests {
 		
 	}
 	
+	@Tag("Q9")
 	@Test
 	public void callConstant() throws Throwable{
 		// crée une nouvelle méthode qui ne prend rien en argument et qui renvoie une constante int qui vaut 9
@@ -93,6 +101,7 @@ public class ExampleTests {
 		assertEquals(9, (int)methodHandleConstant.invokeExact());
 	}
 	
+	@Tag("Q10")
 	@Test
 	public void callGuardWithTest() throws Throwable{
 		// Renvoie 1
@@ -126,7 +135,7 @@ public class ExampleTests {
 
 /*
  * 4.
- * La classe lookpu sert à connaître les visibilité 
+ * La classe lookup sert à connaître les visibilité 
  * privateLokkupIn est équivalent à setAccessible
  * 
  * methode virtuelle = methode d'instance ou d'interface, polymorphisme
