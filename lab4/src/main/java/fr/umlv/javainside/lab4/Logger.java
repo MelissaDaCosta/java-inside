@@ -49,8 +49,27 @@ public interface Logger {
 			methodhandle = MethodHandles.insertArguments(methodhandle, 0, consumer);	// == methodhandle.bindTo(consumer)
 			// On veut (String) void
 			methodhandle = methodhandle.asType(methodType(void.class, String.class));
-			return methodhandle;
-			
-		
+			return methodhandle;		
+	}
+	
+	
+	public static Logger fastOf(Class<?> declaringClass, Consumer<? super String> consumer) {
+		Objects.requireNonNull(declaringClass);
+		Objects.requireNonNull(consumer);
+		var mh = createLoggingMethodHandle(declaringClass, consumer);
+		return (message)->{
+			Objects.requireNonNull(message);
+			try {
+				mh.invokeExact(message);
+			} catch (Throwable t) {
+				if (t instanceof RuntimeException) {
+					throw (RuntimeException) t;
+				}
+				if (t instanceof Error) {
+					throw (Error) t;
+				}
+				throw new UndeclaredThrowableException(t);
+			}
+		};
 	}
 }

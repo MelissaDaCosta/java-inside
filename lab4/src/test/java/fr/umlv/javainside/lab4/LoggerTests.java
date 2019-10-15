@@ -1,4 +1,4 @@
-package lab4;
+package fr.umlv.javainside.lab4;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
