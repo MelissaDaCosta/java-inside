@@ -6,11 +6,8 @@ matrix:
     - os: linux
       env:
         - FOLDER=lab1
-      env:
         - FOLDER=lab2
-      env:
         - FOLDER=lab3
-      env:
         - FOLDER=lab4
 
 script:
