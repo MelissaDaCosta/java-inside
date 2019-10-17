@@ -1,5 +1,6 @@
 package fr.umlv.javainside.lab4;
 
+import static java.lang.invoke.MethodHandles.insertArguments;
 import static java.lang.invoke.MethodType.methodType;
 
 import java.lang.invoke.MethodHandle;
@@ -36,6 +37,8 @@ public interface Logger {
 			}
 		};
 	}
+	
+	// 3. 
 	/*
 	private static MethodHandle createLoggingMethodHandle(Class<?> declaringClass, Consumer<? super String> consumer) {
 		var lookup = MethodHandles.lookup();
@@ -57,6 +60,7 @@ public interface Logger {
 		Objects.requireNonNull(declaringClass);
 		Objects.requireNonNull(consumer);
 		var mh = createLoggingMethodHandle(declaringClass, consumer);
+		// <=> méthode log
 		return (message)->{
 			Objects.requireNonNull(message);
 			try {
@@ -74,9 +78,29 @@ public interface Logger {
 	}
 
 	// 7.
+	
 	private static MethodHandle createLoggingMethodHandle(Class<?> declaringClass, Consumer<? super String> consumer) {
-		return ENABLE_CALLSITES.get(declaringClass).dynamicInvoker();
+		var lookup = MethodHandles.lookup();
+		MethodHandle target;
+		MethodHandle fallback;
+		
+		var test =  ENABLE_CALLSITES.get(declaringClass).dynamicInvoker();
+		
+		try {
+			// (Consumer, Object) void, Consumer = this
+			target = lookup.findVirtual(Consumer.class, "accept", methodType(void.class, Object.class));
+			// doit avoir la même signature que le fallback final void(String)
+			fallback = MethodHandles.empty(methodType(void.class, String.class));
 			
+		}catch(IllegalAccessException | NoSuchMethodException e) {
+			throw new AssertionError(e);
+		}
+		
+		target = insertArguments(target, 0, consumer);	// == methodhandle.bindTo(consumer)
+			// On veut (String) void
+		target = target.asType(methodType(void.class, String.class));
+			
+		return MethodHandles.guardWithTest(test, target, fallback);		
 	}
 	
 	//private static final ClassValue<MutableCallSite> ENABLE_CALLSITES = new ClassValue<MutableCallSite>() {
@@ -86,7 +110,7 @@ public interface Logger {
 		  }
 		};
 
-		public static void enable(Class<?> declaringClass, boolean enable) {
+	public static void enable(Class<?> declaringClass, boolean enable) {
 		  ENABLE_CALLSITES.get(declaringClass).setTarget(MethodHandles.constant(boolean.class, enable));
 		}
 }

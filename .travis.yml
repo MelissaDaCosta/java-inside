@@ -1,21 +1,16 @@
 language: java
 jdk: openjdk13
 
-matrix:
-  include:
-    - os: linux
-       env:
-        - FOLDER=lab1
-    - os: osx
-      env:
-        - FOLDER=lab2
-    - os: linux
-      env:
-        - FOLDER=lab3
-    - os: linux
-      env:
-        - FOLDER=lab4
+os:
+- linux
+
+env:
+  matrix:
+    - FOLDER=lab1
+    - FOLDER=lab2
+    - FOLDER=lab3
+    - FOLDER=lab4
 
 script:
-    - cd $FOLDER
-    - mvn package
+  - cd $FOLDER
+  - mvn package

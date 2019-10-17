@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import fr.umlv.javainside.lab4.Logger;
-
 public class LoggerTests {
 	
 	 private static class Foo {
@@ -16,8 +14,15 @@ public class LoggerTests {
 			STRING_BUILDER.setLength(0);	// vide le string builder
 			STRING_BUILDER.append(msg);		// le remplie
 		});
-		
 	}
+	 
+	 private static class Bar {
+		 private static final StringBuilder STRING_BUILDER = new StringBuilder();
+		 private static final Logger LOGGER = Logger.fastOf(Bar.class, (msg)->{
+				STRING_BUILDER.setLength(0);	// vide le string builder
+				STRING_BUILDER.append(msg);		// le remplie
+			});
+		}
 
 	
 	@Test
@@ -40,4 +45,18 @@ public class LoggerTests {
 
 	}
 
+	// 10.
+	
+	@Test
+	void testThreeLoggers1() {
+		// émet un message :
+		Bar.LOGGER.log("message");
+		assertEquals("message", Bar.STRING_BUILDER.toString());
+		// n'émet pas de message :
+		assertThrows(NullPointerException.class, ()-> Logger.fastOf(Bar.class, (msg)->{}).log(null));
+		// n'est pas enable : disable
+		Logger.enable(Bar.class, false);
+
+	}
+	
 }

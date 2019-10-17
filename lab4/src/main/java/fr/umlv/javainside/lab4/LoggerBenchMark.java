@@ -1,6 +1,6 @@
 package fr.umlv.javainside.lab4;
 
-/*
+/* Si laisser les --enable-preview dans pom.xml : 
  java --enable-preview -jar target/benchmarks.jar
  */
 import java.util.concurrent.TimeUnit;
@@ -14,10 +14,6 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
-import org.openjdk.jmh.runner.Runner;
-import org.openjdk.jmh.runner.RunnerException;
-import org.openjdk.jmh.runner.options.Options;
-import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 @Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
@@ -38,6 +34,18 @@ public class LoggerBenchMark {
   @Benchmark
   public void no_op() {
     // empty : cout d'un appel de méthode
+	  /*
+	  
+	  Result "fr.umlv.javainside.lab4.LoggerBenchMark.no_op":
+		  0,375 ±(99.9%) 0,004 ns/op [Average]
+		  (min, avg, max) = (0,371, 0,375, 0,381), stdev = 0,003
+		  CI (99.9%): [0,371, 0,378] (assumes normal distribution)
+		  
+		  Result "fr.umlv.javainside.lab4.LoggerBenchMark.simple_logger":
+  0,379 ±(99.9%) 0,005 ns/op [Average]
+  (min, avg, max) = (0,372, 0,379, 0,393), stdev = 0,005
+  CI (99.9%): [0,373, 0,384] (assumes normal distribution)
+		  */
   }
   
   @Benchmark
@@ -49,5 +57,27 @@ public class LoggerBenchMark {
   public void fast_logger() {
     Bar.LOGGER.log("test");	// même cout que no op, remplace tout le code par rien
     // Dans le cas ou la lambda est considéré comme une constance alors toutes les variables sont considérer comme des constantes
+    /*
+    Result "fr.umlv.javainside.lab4.LoggerBenchMark.fast_logger":
+    	  0,381 ±(99.9%) 0,002 ns/op [Average]
+    	  (min, avg, max) = (0,378, 0,381, 0,385), stdev = 0,002
+    	  CI (99.9%): [0,379, 0,383] (assumes normal distribution)
+    	  */
   }
+  
+  @Benchmark
+  public void create_and_disable_logger() {
+    Foo.LOGGER.log("test");
+    Logger.enable(Foo.class, false);
+    
+    /*
+    Result "fr.umlv.javainside.lab4.LoggerBenchMark.create_and_disable_logger":
+    	  157,773 ±(99.9%) 28,997 ns/op [Average]
+    	  (min, avg, max) = (135,455, 157,773, 212,947), stdev = 27,124
+    	  CI (99.9%): [128,776, 186,770] (assumes normal distribution)
+    	  
+    	  énorme cout
+     */
+  }
+  
 }
