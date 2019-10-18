@@ -1,0 +1,241 @@
+# JMH version: 1.21
+# VM version: JDK 13-ea, OpenJDK 64-Bit Server VM, 13-ea+30-Ubuntu-118.04
+# VM invoker: /usr/lib/jvm/java-13-openjdk-amd64/bin/java
+# VM options: <none>
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: fr.umlv.javainside.lab4.LoggerBenchMark.create_and_disable_logger
+
+# Run progress: 0,00% complete, ETA 00:02:00
+# Fork: 1 of 3
+# Warmup Iteration   1: 519,083 ns/op
+# Warmup Iteration   2: 934,920 ns/op
+# Warmup Iteration   3: 931,357 ns/op
+# Warmup Iteration   4: 901,148 ns/op
+# Warmup Iteration   5: 897,821 ns/op
+Iteration   1: 902,396 ns/op
+Iteration   2: 913,230 ns/op
+Iteration   3: 986,134 ns/op
+Iteration   4: 894,906 ns/op
+Iteration   5: 927,799 ns/op
+
+# Run progress: 8,33% complete, ETA 00:01:53
+# Fork: 2 of 3
+# Warmup Iteration   1: 551,168 ns/op
+# Warmup Iteration   2: 998,669 ns/op
+# Warmup Iteration   3: 892,630 ns/op
+# Warmup Iteration   4: 952,149 ns/op
+# Warmup Iteration   5: 919,120 ns/op
+Iteration   1: 919,267 ns/op
+Iteration   2: 922,764 ns/op
+Iteration   3: 935,587 ns/op
+Iteration   4: 1154,747 ns/op
+Iteration   5: 1074,744 ns/op
+
+# Run progress: 16,67% complete, ETA 00:01:43
+# Fork: 3 of 3
+# Warmup Iteration   1: 596,910 ns/op
+# Warmup Iteration   2: 1093,754 ns/op
+# Warmup Iteration   3: 1016,484 ns/op
+# Warmup Iteration   4: 1094,470 ns/op
+# Warmup Iteration   5: 1148,466 ns/op
+Iteration   1: 1113,540 ns/op
+Iteration   2: 1106,567 ns/op
+Iteration   3: 1076,286 ns/op
+Iteration   4: 1072,593 ns/op
+Iteration   5: 1107,388 ns/op
+
+
+Result "fr.umlv.javainside.lab4.LoggerBenchMark.create_and_disable_logger":
+  1007,197 ±(99.9%) 101,325 ns/op [Average]
+  (min, avg, max) = (894,906, 1007,197, 1154,747), stdev = 94,779
+  CI (99.9%): [905,872, 1108,521] (assumes normal distribution)
+
+
+# JMH version: 1.21
+# VM version: JDK 13-ea, OpenJDK 64-Bit Server VM, 13-ea+30-Ubuntu-118.04
+# VM invoker: /usr/lib/jvm/java-13-openjdk-amd64/bin/java
+# VM options: <none>
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: fr.umlv.javainside.lab4.LoggerBenchMark.fast_logger
+
+# Run progress: 25,00% complete, ETA 00:01:32
+# Fork: 1 of 3
+# Warmup Iteration   1: 0,557 ns/op
+# Warmup Iteration   2: 0,543 ns/op
+# Warmup Iteration   3: 0,544 ns/op
+# Warmup Iteration   4: 0,544 ns/op
+# Warmup Iteration   5: 0,533 ns/op
+Iteration   1: 0,534 ns/op
+Iteration   2: 0,532 ns/op
+Iteration   3: 0,567 ns/op
+Iteration   4: 0,511 ns/op
+Iteration   5: 0,492 ns/op
+
+# Run progress: 33,33% complete, ETA 00:01:22
+# Fork: 2 of 3
+# Warmup Iteration   1: 0,508 ns/op
+# Warmup Iteration   2: 0,473 ns/op
+# Warmup Iteration   3: 0,469 ns/op
+# Warmup Iteration   4: 0,467 ns/op
+# Warmup Iteration   5: 0,466 ns/op
+Iteration   1: 0,470 ns/op
+Iteration   2: 0,462 ns/op
+Iteration   3: 0,466 ns/op
+Iteration   4: 0,520 ns/op
+Iteration   5: 0,548 ns/op
+
+# Run progress: 41,67% complete, ETA 00:01:12
+# Fork: 3 of 3
+# Warmup Iteration   1: 0,682 ns/op
+# Warmup Iteration   2: 0,613 ns/op
+# Warmup Iteration   3: 0,658 ns/op
+# Warmup Iteration   4: 0,525 ns/op
+# Warmup Iteration   5: 0,550 ns/op
+Iteration   1: 0,561 ns/op
+Iteration   2: 0,554 ns/op
+Iteration   3: 0,615 ns/op
+Iteration   4: 0,549 ns/op
+Iteration   5: 0,500 ns/op
+
+
+Result "fr.umlv.javainside.lab4.LoggerBenchMark.fast_logger":
+  0,525 ±(99.9%) 0,046 ns/op [Average]
+  (min, avg, max) = (0,462, 0,525, 0,615), stdev = 0,043
+  CI (99.9%): [0,480, 0,571] (assumes normal distribution)
+
+
+# JMH version: 1.21
+# VM version: JDK 13-ea, OpenJDK 64-Bit Server VM, 13-ea+30-Ubuntu-118.04
+# VM invoker: /usr/lib/jvm/java-13-openjdk-amd64/bin/java
+# VM options: <none>
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: fr.umlv.javainside.lab4.LoggerBenchMark.no_op
+
+# Run progress: 50,00% complete, ETA 00:01:01
+# Fork: 1 of 3
+# Warmup Iteration   1: 0,503 ns/op
+# Warmup Iteration   2: 0,478 ns/op
+# Warmup Iteration   3: 0,471 ns/op
+# Warmup Iteration   4: 0,470 ns/op
+# Warmup Iteration   5: 0,474 ns/op
+Iteration   1: 0,480 ns/op
+Iteration   2: 0,473 ns/op
+Iteration   3: 0,499 ns/op
+Iteration   4: 0,701 ns/op
+Iteration   5: 0,559 ns/op
+
+# Run progress: 58,33% complete, ETA 00:00:51
+# Fork: 2 of 3
+# Warmup Iteration   1: 0,563 ns/op
+# Warmup Iteration   2: 0,547 ns/op
+# Warmup Iteration   3: 0,511 ns/op
+# Warmup Iteration   4: 0,506 ns/op
+# Warmup Iteration   5: 0,528 ns/op
+Iteration   1: 0,549 ns/op
+Iteration   2: 0,582 ns/op
+Iteration   3: 0,541 ns/op
+Iteration   4: 0,500 ns/op
+Iteration   5: 0,485 ns/op
+
+# Run progress: 66,67% complete, ETA 00:00:41
+# Fork: 3 of 3
+# Warmup Iteration   1: 0,529 ns/op
+# Warmup Iteration   2: 0,494 ns/op
+# Warmup Iteration   3: 0,470 ns/op
+# Warmup Iteration   4: 0,470 ns/op
+# Warmup Iteration   5: 0,469 ns/op
+Iteration   1: 0,469 ns/op
+Iteration   2: 0,467 ns/op
+Iteration   3: 0,470 ns/op
+Iteration   4: 0,468 ns/op
+Iteration   5: 0,468 ns/op
+
+
+Result "fr.umlv.javainside.lab4.LoggerBenchMark.no_op":
+  0,514 ±(99.9%) 0,069 ns/op [Average]
+  (min, avg, max) = (0,467, 0,514, 0,701), stdev = 0,064
+  CI (99.9%): [0,445, 0,583] (assumes normal distribution)
+
+
+# JMH version: 1.21
+# VM version: JDK 13-ea, OpenJDK 64-Bit Server VM, 13-ea+30-Ubuntu-118.04
+# VM invoker: /usr/lib/jvm/java-13-openjdk-amd64/bin/java
+# VM options: <none>
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: fr.umlv.javainside.lab4.LoggerBenchMark.simple_logger
+
+# Run progress: 75,00% complete, ETA 00:00:30
+# Fork: 1 of 3
+# Warmup Iteration   1: 4,122 ns/op
+# Warmup Iteration   2: 3,886 ns/op
+# Warmup Iteration   3: 3,530 ns/op
+# Warmup Iteration   4: 3,514 ns/op
+# Warmup Iteration   5: 3,537 ns/op
+Iteration   1: 3,516 ns/op
+Iteration   2: 4,290 ns/op
+Iteration   3: 4,371 ns/op
+Iteration   4: 4,187 ns/op
+Iteration   5: 4,473 ns/op
+
+# Run progress: 83,33% complete, ETA 00:00:20
+# Fork: 2 of 3
+# Warmup Iteration   1: 4,450 ns/op
+# Warmup Iteration   2: 4,483 ns/op
+# Warmup Iteration   3: 4,699 ns/op
+# Warmup Iteration   4: 4,383 ns/op
+# Warmup Iteration   5: 4,434 ns/op
+Iteration   1: 4,123 ns/op
+Iteration   2: 4,168 ns/op
+Iteration   3: 4,410 ns/op
+Iteration   4: 4,337 ns/op
+Iteration   5: 4,718 ns/op
+
+# Run progress: 91,67% complete, ETA 00:00:10
+# Fork: 3 of 3
+# Warmup Iteration   1: 4,980 ns/op
+# Warmup Iteration   2: 4,893 ns/op
+# Warmup Iteration   3: 4,598 ns/op
+# Warmup Iteration   4: 5,674 ns/op
+# Warmup Iteration   5: 6,189 ns/op
+Iteration   1: 5,337 ns/op
+Iteration   2: 4,878 ns/op
+Iteration   3: 4,771 ns/op
+Iteration   4: 4,767 ns/op
+Iteration   5: 4,794 ns/op
+
+
+Result "fr.umlv.javainside.lab4.LoggerBenchMark.simple_logger":
+  4,476 ±(99.9%) 0,454 ns/op [Average]
+  (min, avg, max) = (3,516, 4,476, 5,337), stdev = 0,425
+  CI (99.9%): [4,022, 4,930] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:02:03
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+Benchmark                                  Mode  Cnt     Score     Error  Units
+LoggerBenchMark.create_and_disable_logger  avgt   15  1007,197 ± 101,325  ns/op
+LoggerBenchMark.fast_logger                avgt   15     0,525 ±   0,046  ns/op
+LoggerBenchMark.no_op                      avgt   15     0,514 ±   0,069  ns/op
+LoggerBenchMark.simple_logger              avgt   15     4,476 ±   0,454  ns/op

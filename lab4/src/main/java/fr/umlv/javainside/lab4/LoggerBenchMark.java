@@ -67,8 +67,8 @@ public class LoggerBenchMark {
   
   @Benchmark
   public void create_and_disable_logger() {
-    Foo.LOGGER.log("test");
-    Logger.enable(Foo.class, false);
+    Bar.LOGGER.log("test");
+    Logger.enable(Bar.class, false);
     
     /*
     Result "fr.umlv.javainside.lab4.LoggerBenchMark.create_and_disable_logger":

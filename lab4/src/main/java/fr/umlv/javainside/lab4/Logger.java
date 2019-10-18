@@ -111,6 +111,8 @@ public interface Logger {
 		};
 
 	public static void enable(Class<?> declaringClass, boolean enable) {
+		// update MethodHandles.constant(boolean.class, true) 
+		// into MethodHandles.constant(boolean.class, enable)
 		  ENABLE_CALLSITES.get(declaringClass).setTarget(MethodHandles.constant(boolean.class, enable));
 		}
 }
