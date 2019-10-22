@@ -10,6 +10,7 @@ env:
     - FOLDER=lab2
     - FOLDER=lab3
     - FOLDER=lab4
+    - FOLDER=lab5
 
 script:
   - cd $FOLDER
