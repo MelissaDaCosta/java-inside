@@ -38,7 +38,7 @@ public class StringSwitchExampleTests {
 	}
 	
 	static Stream<ToIntFunction<String>> testWithMultipleMethods(){
-		return Stream.of(StringSwitchExample::stringSwitch, StringSwitchExample::stringSwitch2);	// Test 2 méthodes
+		return Stream.of(StringSwitchExample::stringSwitch, StringSwitchExample::stringSwitch2, StringSwitchExample::stringSwitch3);	// Test plusieurs méthodes
 	}
 
 
