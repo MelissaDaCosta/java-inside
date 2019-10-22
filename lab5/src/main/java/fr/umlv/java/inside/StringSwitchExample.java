@@ -76,7 +76,16 @@ public class StringSwitchExample {
 	// q3.
 
 	public static int stringSwitch3(String string) {
-		return -1;
+		var mh = createMHFromStrings3("foo", "bar", "bazz");
+
+		try {
+			return (int) mh.invokeExact(string);
+
+		} catch (RuntimeException | Error e) {
+			throw e;
+		} catch (Throwable t) {
+			throw new UndeclaredThrowableException(t);
+		}
 
 	}
 
