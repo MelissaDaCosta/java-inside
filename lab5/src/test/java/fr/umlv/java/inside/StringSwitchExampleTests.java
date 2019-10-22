@@ -26,7 +26,7 @@ public class StringSwitchExampleTests {
 	}
 	
 	@ParameterizedTest
-	@MethodSource("testWithMultipleMethods")
+	@MethodSource("testWithMultipleMethods")	// Méthode à appeler
 	public void multipleMethod(ToIntFunction<String> function) {
 		assertAll(
 				()->assertEquals(0, function.applyAsInt("foo")),
