@@ -14,19 +14,25 @@ import java.util.List;
 
 
 public class StringSwitchExample {
+	
+	// Exercice 1 - Switch on strings
 
 	private static final MethodHandle STRING_EQUALS;
 
+	// bloc static pour être appelée une fois
 	static {
 		var lookup = MethodHandles.lookup();
 		try {
+			// stocke la méthode equals de la classe String 
+			// qui renvoie un boolean et prend en argument un Object
 			STRING_EQUALS = lookup.findVirtual(String.class, "equals",
 					MethodType.methodType(boolean.class, Object.class));
 		} catch (NoSuchMethodException | IllegalAccessException e) {
-			throw new AssertionError(e);
+			throw new AssertionError(e);	// erreur "grave"
 		}
 	}
 
+	// switch de base
 	public static int stringSwitch(String string) {
 		switch (string) {
 		case "foo":
@@ -39,32 +45,33 @@ public class StringSwitchExample {
 			return -1;
 		}
 	}
+	
+	// Exercice 2 - Inlining Cache
 
 	private static MethodHandle createMHFromStrings2(String... strings) {
 
-		var fallback = constant(int.class, -1);
-		fallback = dropArguments(fallback, 0, String.class);
+		var fallback = constant(int.class, -1);	// Constante qui vaut -1
+		fallback = dropArguments(fallback, 0, String.class);	// Retire a l'éxécution la String donnée au test
 
-		var execution = fallback;
+		var execution = fallback; // Si aucun argument (on ne passe pas la boucle fo)r -> renvoie constante fallback -1
 
 		for (var i = 0; i < strings.length; i++) {
-			var target = MethodHandles.constant(int.class, i);
-			target = dropArguments(target, 0, String.class);
+			var target = MethodHandles.constant(int.class, i);	// Constante qui vaut la position de la string dans le varargs 
+			target = dropArguments(target, 0, String.class); // Retire a l'éxécution la String donnée au test
 
+			// string.equals(argument ajoutée qui est strings[i] le varargs)
 			var test = insertArguments(STRING_EQUALS, 1, strings[i]);
 			execution = guardWithTest(test, target, execution);
-
 		}
-
 		return execution;
-
 	}
 
+	// switch 2 qui utilise method handle 
 	public static int stringSwitch2(String string) {
 		var mh = createMHFromStrings2("foo", "bar", "bazz");
 
 		try {
-			return (int) mh.invokeExact(string);
+			return (int) mh.invokeExact(string);	// appelle la méthode equals
 
 		} catch (RuntimeException | Error e) {
 			throw e;
@@ -73,20 +80,18 @@ public class StringSwitchExample {
 		}
 	}
 
-	// q3.
-
+	// switch 3 pour utilise inling cache
 	public static int stringSwitch3(String string) {
 		var mh = createMHFromStrings3("foo", "bar", "bazz");
 
 		try {
-			return (int) mh.invokeExact(string);
+			return (int) mh.invokeExact(string); // appelle la méthode equals
 
 		} catch (RuntimeException | Error e) {
 			throw e;
 		} catch (Throwable t) {
 			throw new UndeclaredThrowableException(t);
 		}
-
 	}
 
 	public static MethodHandle createMHFromStrings3(String... matches) {
