@@ -78,30 +78,23 @@ public interface Logger {
 	}
 
 	// 7.
-	
+		
 	private static MethodHandle createLoggingMethodHandle(Class<?> declaringClass, Consumer<? super String> consumer) {
+		MethodHandle mh;
+		MethodHandle mhTest;
 		var lookup = MethodHandles.lookup();
-		MethodHandle target;
-		MethodHandle fallback;
-		
-		var test =  ENABLE_CALLSITES.get(declaringClass).dynamicInvoker();
-		
 		try {
-			// (Consumer, Object) void, Consumer = this
-			target = lookup.findVirtual(Consumer.class, "accept", methodType(void.class, Object.class));
-			// doit avoir la même signature que le fallback final void(String)
-			fallback = MethodHandles.empty(methodType(void.class, String.class));
-			
-		}catch(IllegalAccessException | NoSuchMethodException e) {
+			mhTest = ENABLE_CALLSITES.get(declaringClass).dynamicInvoker();
+			mh = lookup.findVirtual(Consumer.class, "accept", methodType(void.class, Object.class));
+
+		} catch (NoSuchMethodException | IllegalAccessException e) {
 			throw new AssertionError(e);
 		}
-		
-		target = insertArguments(target, 0, consumer);	// == methodhandle.bindTo(consumer)
-			// On veut (String) void
-		target = target.asType(methodType(void.class, String.class));
-			
-		return MethodHandles.guardWithTest(test, target, fallback);		
+		mh = mh.bindTo(consumer);
+		mh = mh.asType(methodType(void.class, String.class));
+		return MethodHandles.guardWithTest(mhTest, mh, MethodHandles.empty(methodType(void.class, String.class)));
 	}
+
 	
 	//private static final ClassValue<MutableCallSite> ENABLE_CALLSITES = new ClassValue<MutableCallSite>() {
 	static final ClassValue<MutableCallSite> ENABLE_CALLSITES = new ClassValue<MutableCallSite>() {
