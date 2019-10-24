@@ -4,5 +4,15 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="/home/melissa/.m2/repository/org/openjdk/jmh/jmh-core/1.21/jmh-core-1.21.jar" sourcepath="/home/melissa/.m2/repository/org/openjdk/jmh/jmh-core/1.21/jmh-core-1.21-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="org.openjdk.jmh"/>
+			<attribute name="maven.artifactId" value="jmh-core"/>
+			<attribute name="maven.version" value="1.21"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

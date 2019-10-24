@@ -99,12 +99,14 @@ public class StringSwitchExample {
 		return new InliningCache(matches).dynamicInvoker();
 	}
 
+	
 	static class InliningCache extends MutableCallSite {
 		private static final MethodHandle SLOW_PATH;
 
 		static {
 			var lookup = MethodHandles.lookup();
 			try {
+				// Récupère la méthode slowPath de la classe InliningCache qui renvoie un int et prend un String
 				SLOW_PATH = lookup.findVirtual(InliningCache.class, "slowPath",
 						MethodType.methodType(int.class, String.class));
 			} catch (NoSuchMethodException | IllegalAccessException e) {
@@ -112,11 +114,14 @@ public class StringSwitchExample {
 			}
 		}
 
-		private final java.util.List<String> matches;
+		private final java.util.List<String> matches; // List des paramètres
 
 		public InliningCache(String... matches) {
-			super(MethodType.methodType(int.class, String.class));
+			super(MethodType.methodType(int.class, String.class));	// Appelle le constructeur de MutableCallSite
+			// Crée un MutableCallSite vierge avec un type de retour int et un argument String
 			this.matches = List.of(matches);
+			// maj le MutableCallSite pour qu'il devienne un MethodHandle
+			// de la méthode slowPath avec l'argument this passé en position 0
 			setTarget(MethodHandles.insertArguments(SLOW_PATH, 0, this));
 		}
 
@@ -125,11 +130,11 @@ public class StringSwitchExample {
 			var index = matches.indexOf(value);
 
 			// On veut changer l'arbre :
-			var test = insertArguments(STRING_EQUALS, 1, value);
+			var test = insertArguments(STRING_EQUALS, 1, value);	// Appelle equals avec la value donnée
 			var target = MethodHandles.constant(int.class, index);
 			target = dropArguments(target, 0, String.class);
 			var mh = MethodHandles.guardWithTest(test, target, getTarget());
-			// si ca rate : setTarget du getTarget -> ne change rien
+			// si guardWithTest rate : setTarget du getTarget -> ne change rien
 			setTarget(mh);
 
 			return index;
@@ -142,8 +147,13 @@ public class StringSwitchExample {
 /*
  * 
  * Dans Mutablecall site parmi mutable = method handle Au debut pas d'arbre,
- * pointe sur slowpath Puis si même cha de caract renvoie direct sinon slowPath
+ * pointe sur slowpath Puis si même chaîne de caract renvoie direct sinon slowPath
  * 
  * 
  * Inlining car machine génère instruction pour se souvenir
+ * 
+ * 5.
+ * Sachant que statistiquement la première chaine de caractère que l'on demande est celle qui est le plus demandée.
+ * -> Il faudrait construire l'arbre en commençant par le equals de la première chaîne de caractèer donnée à createMHFromStrings.
+ * 
  */
