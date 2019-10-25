@@ -1,2 +1,12 @@
-fr/umlv/java/inside/StringSwitchExample$InliningCache.class
+fr/umlv/java/inside/generated/StringSwitchBenchmark_jmhType.class
+fr/umlv/java/inside/generated/StringSwitchBenchmark_stringSwitch2_jmhTest.class
+META-INF/CompilerHints
 fr/umlv/java/inside/StringSwitchExample.class
+fr/umlv/java/inside/generated/StringSwitchBenchmark_jmhType_B2.class
+META-INF/BenchmarkList
+fr/umlv/java/inside/StringSwitchExample$InliningCache.class
+fr/umlv/java/inside/generated/StringSwitchBenchmark_jmhType_B3.class
+fr/umlv/java/inside/generated/StringSwitchBenchmark_stringSwitch1_jmhTest.class
+fr/umlv/java/inside/generated/StringSwitchBenchmark_jmhType_B1.class
+fr/umlv/java/inside/generated/StringSwitchBenchmark_stringSwitch3_jmhTest.class
+fr/umlv/java/inside/StringSwitchBenchmark.class

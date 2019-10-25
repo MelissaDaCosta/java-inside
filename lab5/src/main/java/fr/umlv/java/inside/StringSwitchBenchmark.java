@@ -42,8 +42,20 @@ public class StringSwitchBenchmark {
 	}
 
 	@Benchmark
-	  public void stringSwitch1Foo() {
+	  public void stringSwitch1() {
 		list.forEach(l->StringSwitchExample.stringSwitch(l));
+	    
+	  }
+	
+	@Benchmark
+	  public void stringSwitch2() {
+		list.forEach(l->StringSwitchExample.stringSwitch2(l));
+	    
+	  }
+	
+	@Benchmark
+	  public void stringSwitch3() {
+		list.forEach(l->StringSwitchExample.stringSwitch3(l));
 	    
 	  }
 	  

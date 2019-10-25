@@ -146,8 +146,8 @@ public class StringSwitchExample {
 
 /*
  * 
- * Dans Mutablecall site parmi mutable = method handle Au debut pas d'arbre,
- * pointe sur slowpath Puis si même chaîne de caract renvoie direct sinon slowPath
+ * Dans Mutablecallsite parmi mutable = method handle 
+ * Au debut pas d'arbre, pointe sur slowpath Puis si même chaîne de caract renvoie direct sinon slowPath
  * 
  * 
  * Inlining car machine génère instruction pour se souvenir

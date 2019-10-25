@@ -33,7 +33,7 @@ import org.openjdk.jmh.results.AggregationPolicy;
 import org.openjdk.jmh.runner.FailureAssistException;
 
 import fr.umlv.java.inside.generated.StringSwitchBenchmark_jmhType;
-public final class StringSwitchBenchmark_stringSwitch1Foo_jmhTest {
+public final class StringSwitchBenchmark_stringSwitch2_jmhTest {
 
     boolean p000, p001, p002, p003, p004, p005, p006, p007, p008, p009, p010, p011, p012, p013, p014, p015;
     boolean p016, p017, p018, p019, p020, p021, p022, p023, p024, p025, p026, p027, p028, p029, p030, p031;
@@ -58,7 +58,7 @@ public final class StringSwitchBenchmark_stringSwitch1Foo_jmhTest {
     Blackhole blackhole;
     Control notifyControl;
 
-    public BenchmarkTaskResult stringSwitch1Foo_Throughput(InfraControl control, ThreadParams threadParams) throws Throwable {
+    public BenchmarkTaskResult stringSwitch2_Throughput(InfraControl control, ThreadParams threadParams) throws Throwable {
         this.benchmarkParams = control.benchmarkParams;
         this.iterationParams = control.iterationParams;
         this.threadParams    = threadParams;
@@ -75,17 +75,17 @@ public final class StringSwitchBenchmark_stringSwitch1Foo_jmhTest {
 
             control.announceWarmupReady();
             while (control.warmupShouldWait) {
-                l_stringswitchbenchmark0_G.stringSwitch1Foo();
+                l_stringswitchbenchmark0_G.stringSwitch2();
                 res.allOps++;
             }
 
             notifyControl.startMeasurement = true;
-            stringSwitch1Foo_thrpt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_stringswitchbenchmark0_G);
+            stringSwitch2_thrpt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_stringswitchbenchmark0_G);
             notifyControl.stopMeasurement = true;
             control.announceWarmdownReady();
             try {
                 while (control.warmdownShouldWait) {
-                    l_stringswitchbenchmark0_G.stringSwitch1Foo();
+                    l_stringswitchbenchmark0_G.stringSwitch2();
                     res.allOps++;
                 }
                 control.preTearDown();
@@ -106,19 +106,19 @@ public final class StringSwitchBenchmark_stringSwitch1Foo_jmhTest {
             res.measuredOps *= opsPerInv;
             res.measuredOps /= batchSize;
             BenchmarkTaskResult results = new BenchmarkTaskResult(res.allOps, res.measuredOps);
-            results.add(new ThroughputResult(ResultRole.PRIMARY, "stringSwitch1Foo", res.measuredOps, res.getTime(), benchmarkParams.getTimeUnit()));
+            results.add(new ThroughputResult(ResultRole.PRIMARY, "stringSwitch2", res.measuredOps, res.getTime(), benchmarkParams.getTimeUnit()));
             this.blackhole.evaporate("Yes, I am Stephen Hawking, and know a thing or two about black holes.");
             return results;
         } else
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void stringSwitch1Foo_thrpt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, StringSwitchBenchmark_jmhType l_stringswitchbenchmark0_G) throws Throwable {
+    public static void stringSwitch2_thrpt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, StringSwitchBenchmark_jmhType l_stringswitchbenchmark0_G) throws Throwable {
         long operations = 0;
         long realTime = 0;
         result.startTime = System.nanoTime();
         do {
-            l_stringswitchbenchmark0_G.stringSwitch1Foo();
+            l_stringswitchbenchmark0_G.stringSwitch2();
             operations++;
         } while(!control.isDone);
         result.stopTime = System.nanoTime();
@@ -127,7 +127,7 @@ public final class StringSwitchBenchmark_stringSwitch1Foo_jmhTest {
     }
 
 
-    public BenchmarkTaskResult stringSwitch1Foo_AverageTime(InfraControl control, ThreadParams threadParams) throws Throwable {
+    public BenchmarkTaskResult stringSwitch2_AverageTime(InfraControl control, ThreadParams threadParams) throws Throwable {
         this.benchmarkParams = control.benchmarkParams;
         this.iterationParams = control.iterationParams;
         this.threadParams    = threadParams;
@@ -144,17 +144,17 @@ public final class StringSwitchBenchmark_stringSwitch1Foo_jmhTest {
 
             control.announceWarmupReady();
             while (control.warmupShouldWait) {
-                l_stringswitchbenchmark0_G.stringSwitch1Foo();
+                l_stringswitchbenchmark0_G.stringSwitch2();
                 res.allOps++;
             }
 
             notifyControl.startMeasurement = true;
-            stringSwitch1Foo_avgt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_stringswitchbenchmark0_G);
+            stringSwitch2_avgt_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, l_stringswitchbenchmark0_G);
             notifyControl.stopMeasurement = true;
             control.announceWarmdownReady();
             try {
                 while (control.warmdownShouldWait) {
-                    l_stringswitchbenchmark0_G.stringSwitch1Foo();
+                    l_stringswitchbenchmark0_G.stringSwitch2();
                     res.allOps++;
                 }
                 control.preTearDown();
@@ -175,19 +175,19 @@ public final class StringSwitchBenchmark_stringSwitch1Foo_jmhTest {
             res.measuredOps *= opsPerInv;
             res.measuredOps /= batchSize;
             BenchmarkTaskResult results = new BenchmarkTaskResult(res.allOps, res.measuredOps);
-            results.add(new AverageTimeResult(ResultRole.PRIMARY, "stringSwitch1Foo", res.measuredOps, res.getTime(), benchmarkParams.getTimeUnit()));
+            results.add(new AverageTimeResult(ResultRole.PRIMARY, "stringSwitch2", res.measuredOps, res.getTime(), benchmarkParams.getTimeUnit()));
             this.blackhole.evaporate("Yes, I am Stephen Hawking, and know a thing or two about black holes.");
             return results;
         } else
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void stringSwitch1Foo_avgt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, StringSwitchBenchmark_jmhType l_stringswitchbenchmark0_G) throws Throwable {
+    public static void stringSwitch2_avgt_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, StringSwitchBenchmark_jmhType l_stringswitchbenchmark0_G) throws Throwable {
         long operations = 0;
         long realTime = 0;
         result.startTime = System.nanoTime();
         do {
-            l_stringswitchbenchmark0_G.stringSwitch1Foo();
+            l_stringswitchbenchmark0_G.stringSwitch2();
             operations++;
         } while(!control.isDone);
         result.stopTime = System.nanoTime();
@@ -196,7 +196,7 @@ public final class StringSwitchBenchmark_stringSwitch1Foo_jmhTest {
     }
 
 
-    public BenchmarkTaskResult stringSwitch1Foo_SampleTime(InfraControl control, ThreadParams threadParams) throws Throwable {
+    public BenchmarkTaskResult stringSwitch2_SampleTime(InfraControl control, ThreadParams threadParams) throws Throwable {
         this.benchmarkParams = control.benchmarkParams;
         this.iterationParams = control.iterationParams;
         this.threadParams    = threadParams;
@@ -213,7 +213,7 @@ public final class StringSwitchBenchmark_stringSwitch1Foo_jmhTest {
 
             control.announceWarmupReady();
             while (control.warmupShouldWait) {
-                l_stringswitchbenchmark0_G.stringSwitch1Foo();
+                l_stringswitchbenchmark0_G.stringSwitch2();
                 res.allOps++;
             }
 
@@ -222,12 +222,12 @@ public final class StringSwitchBenchmark_stringSwitch1Foo_jmhTest {
             int batchSize = iterationParams.getBatchSize();
             int opsPerInv = benchmarkParams.getOpsPerInvocation();
             SampleBuffer buffer = new SampleBuffer();
-            stringSwitch1Foo_sample_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, buffer, targetSamples, opsPerInv, batchSize, l_stringswitchbenchmark0_G);
+            stringSwitch2_sample_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, buffer, targetSamples, opsPerInv, batchSize, l_stringswitchbenchmark0_G);
             notifyControl.stopMeasurement = true;
             control.announceWarmdownReady();
             try {
                 while (control.warmdownShouldWait) {
-                    l_stringswitchbenchmark0_G.stringSwitch1Foo();
+                    l_stringswitchbenchmark0_G.stringSwitch2();
                     res.allOps++;
                 }
                 control.preTearDown();
@@ -245,14 +245,14 @@ public final class StringSwitchBenchmark_stringSwitch1Foo_jmhTest {
             res.allOps /= batchSize;
             res.measuredOps *= opsPerInv;
             BenchmarkTaskResult results = new BenchmarkTaskResult(res.allOps, res.measuredOps);
-            results.add(new SampleTimeResult(ResultRole.PRIMARY, "stringSwitch1Foo", buffer, benchmarkParams.getTimeUnit()));
+            results.add(new SampleTimeResult(ResultRole.PRIMARY, "stringSwitch2", buffer, benchmarkParams.getTimeUnit()));
             this.blackhole.evaporate("Yes, I am Stephen Hawking, and know a thing or two about black holes.");
             return results;
         } else
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void stringSwitch1Foo_sample_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, SampleBuffer buffer, int targetSamples, long opsPerInv, int batchSize, StringSwitchBenchmark_jmhType l_stringswitchbenchmark0_G) throws Throwable {
+    public static void stringSwitch2_sample_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, SampleBuffer buffer, int targetSamples, long opsPerInv, int batchSize, StringSwitchBenchmark_jmhType l_stringswitchbenchmark0_G) throws Throwable {
         long realTime = 0;
         long operations = 0;
         int rnd = (int)System.nanoTime();
@@ -267,7 +267,7 @@ public final class StringSwitchBenchmark_stringSwitch1Foo_jmhTest {
             }
             for (int b = 0; b < batchSize; b++) {
                 if (control.volatileSpoiler) return;
-                l_stringswitchbenchmark0_G.stringSwitch1Foo();
+                l_stringswitchbenchmark0_G.stringSwitch2();
             }
             if (sample) {
                 buffer.add((System.nanoTime() - time) / opsPerInv);
@@ -285,7 +285,7 @@ public final class StringSwitchBenchmark_stringSwitch1Foo_jmhTest {
     }
 
 
-    public BenchmarkTaskResult stringSwitch1Foo_SingleShotTime(InfraControl control, ThreadParams threadParams) throws Throwable {
+    public BenchmarkTaskResult stringSwitch2_SingleShotTime(InfraControl control, ThreadParams threadParams) throws Throwable {
         this.benchmarkParams = control.benchmarkParams;
         this.iterationParams = control.iterationParams;
         this.threadParams    = threadParams;
@@ -302,7 +302,7 @@ public final class StringSwitchBenchmark_stringSwitch1Foo_jmhTest {
             notifyControl.startMeasurement = true;
             RawResults res = new RawResults();
             int batchSize = iterationParams.getBatchSize();
-            stringSwitch1Foo_ss_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, batchSize, l_stringswitchbenchmark0_G);
+            stringSwitch2_ss_jmhStub(control, res, benchmarkParams, iterationParams, threadParams, blackhole, notifyControl, startRndMask, batchSize, l_stringswitchbenchmark0_G);
             control.preTearDown();
 
             if (control.isLastIteration()) {
@@ -313,19 +313,19 @@ public final class StringSwitchBenchmark_stringSwitch1Foo_jmhTest {
             int opsPerInv = control.benchmarkParams.getOpsPerInvocation();
             long totalOps = opsPerInv;
             BenchmarkTaskResult results = new BenchmarkTaskResult(totalOps, totalOps);
-            results.add(new SingleShotResult(ResultRole.PRIMARY, "stringSwitch1Foo", res.getTime(), benchmarkParams.getTimeUnit()));
+            results.add(new SingleShotResult(ResultRole.PRIMARY, "stringSwitch2", res.getTime(), benchmarkParams.getTimeUnit()));
             this.blackhole.evaporate("Yes, I am Stephen Hawking, and know a thing or two about black holes.");
             return results;
         } else
             throw new IllegalStateException("Harness failed to distribute threads among groups properly");
     }
 
-    public static void stringSwitch1Foo_ss_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, int batchSize, StringSwitchBenchmark_jmhType l_stringswitchbenchmark0_G) throws Throwable {
+    public static void stringSwitch2_ss_jmhStub(InfraControl control, RawResults result, BenchmarkParams benchmarkParams, IterationParams iterationParams, ThreadParams threadParams, Blackhole blackhole, Control notifyControl, int startRndMask, int batchSize, StringSwitchBenchmark_jmhType l_stringswitchbenchmark0_G) throws Throwable {
         long realTime = 0;
         result.startTime = System.nanoTime();
         for (int b = 0; b < batchSize; b++) {
             if (control.volatileSpoiler) return;
-            l_stringswitchbenchmark0_G.stringSwitch1Foo();
+            l_stringswitchbenchmark0_G.stringSwitch2();
         }
         result.stopTime = System.nanoTime();
         result.realTime = realTime;
