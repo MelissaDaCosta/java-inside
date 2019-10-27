@@ -18,7 +18,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(3)
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@OutputTimeUnit(TimeUnit.SECONDS)
 @State(Scope.Benchmark)
 
 public class StringSwitchBenchmark {
