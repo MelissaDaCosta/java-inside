@@ -114,12 +114,26 @@ public class StringSwitchExample {
 			}
 		}
 
-		private final java.util.List<String> matches; // List des paramètres
+		private final List<String> matches; // List des paramètres
 
-		public InliningCache(String... matches) {
+		private InliningCache(String... matches) {	//  On le met private dans un second temps
+			/*
 			super(MethodType.methodType(int.class, String.class));	// Appelle le constructeur de MutableCallSite
 			// Crée un MutableCallSite vierge avec un type de retour int et un argument String
 			this.matches = List.of(matches);
+			// maj le MutableCallSite pour qu'il devienne un MethodHandle
+			// de la méthode slowPath avec l'argument this passé en position 0
+			setTarget(MethodHandles.insertArguments(SLOW_PATH, 0, this));
+			*/
+			
+			this(List.of(matches));	// délègue au constructeur principal
+		}
+		
+		// Autre constructeur pour le second arbre :
+		public InliningCache(List<String> matches) {
+			super(MethodType.methodType(int.class, String.class));	// Appelle le constructeur de MutableCallSite
+			// Crée un MutableCallSite vierge avec un type de retour int et un argument String
+			this.matches = matches;
 			// maj le MutableCallSite pour qu'il devienne un MethodHandle
 			// de la méthode slowPath avec l'argument this passé en position 0
 			setTarget(MethodHandles.insertArguments(SLOW_PATH, 0, this));
@@ -133,7 +147,11 @@ public class StringSwitchExample {
 			var test = insertArguments(STRING_EQUALS, 1, value);	// Appelle equals avec la value donnée
 			var target = MethodHandles.constant(int.class, index);
 			target = dropArguments(target, 0, String.class);
-			var mh = MethodHandles.guardWithTest(test, target, getTarget());
+			
+			
+			//var mh = MethodHandles.guardWithTest(test, target, getTarget());
+			// Dans un second temps :
+			var mh = MethodHandles.guardWithTest(test, target, new InliningCache(matches).dynamicInvoker());
 			// si guardWithTest rate : setTarget du getTarget -> ne change rien
 			setTarget(mh);
 
@@ -155,5 +173,12 @@ public class StringSwitchExample {
  * 5.
  * Sachant que statistiquement la première chaine de caractère que l'on demande est celle qui est le plus demandée.
  * -> Il faudrait construire l'arbre en commençant par le equals de la première chaîne de caractèer donnée à createMHFromStrings.
+ * 
+ * Arbre :
+ * MutableCallSite 
+ * /1\
+ * -> retourne valeur si dispo
+ * -> slowPath sinon /!\ On doit ajouter les nouvelles branches de l'arbre ici car avant il se mettait ici : /1\
+ * On doit donc mettre ici une boite mutable
  * 
  */

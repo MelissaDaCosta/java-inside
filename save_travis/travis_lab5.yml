@@ -1,0 +1,17 @@
+language: java
+jdk: openjdk13
+
+os:
+- linux
+
+env:
+  matrix:
+    - FOLDER=lab1
+    - FOLDER=lab2
+    - FOLDER=lab3
+    - FOLDER=lab4
+    - FOLDER=lab5
+
+script:
+  - cd $FOLDER
+  - mvn package
