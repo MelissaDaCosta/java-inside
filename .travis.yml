@@ -14,4 +14,5 @@ env:
     - FOLDER=lab6
 
 script:
+  - chmod u+x travis_script.sh 
   - ./travis_script.sh
