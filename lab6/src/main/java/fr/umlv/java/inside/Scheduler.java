@@ -7,9 +7,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Scheduler {
 
-	private Collection<Continuation> queue;
+	private final Collection<Continuation> queue;
 	// public static final ContinuationScope SCOPE = new ContinuationScope("scope");
-	public SCHEDULER_MODE mode;
+	public final SCHEDULER_MODE mode;
 
 	public static enum SCHEDULER_MODE {
 		STACK, // exécute la dernière continuation qui s'est enregistrée
@@ -30,10 +30,7 @@ public class Scheduler {
 		if (Continuation.getCurrentContinuation(scope) == null) { // Il n'y a pas de continuation courante
 			throw new IllegalStateException();
 		}
-		if(this.mode == SCHEDULER_MODE.RANDOM)
-			this.queue.add(Continuation.getCurrentContinuation(scope));
-		else
-			((ArrayDeque<Continuation>) this.queue).offer(Continuation.getCurrentContinuation(scope)); // Le met en dernier dans la deque
+		this.queue.add(Continuation.getCurrentContinuation(scope));
 		Continuation.yield(scope);
 	}
 
@@ -50,6 +47,8 @@ public class Scheduler {
 				case RANDOM:	// ArrayList
 					int randomValue = ThreadLocalRandom.current().nextInt(0, queue.size());
 					continuation = ((ArrayList<Continuation>) queue).get(randomValue);
+					if (!continuation.isDone())
+				        continuation.run();
 					break;
 			}
 			continuation.run();

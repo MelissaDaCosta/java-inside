@@ -29,7 +29,14 @@ public class SchedulerExample {
 				scheduler.enqueue(scope);
 				System.out.println("end 2");
 			});
-			var list = List.of(continuation1, continuation2);
+			var continuation3 = new Continuation(scope, () -> {
+				System.out.println("start 3");
+				scheduler.enqueue(scope);
+				System.out.println("middle 3");
+				scheduler.enqueue(scope);
+				System.out.println("end 3");
+			});
+			var list = List.of(continuation1, continuation2, continuation3);
 			list.forEach(Continuation::run);
 			scheduler.runLoop();
 		});
