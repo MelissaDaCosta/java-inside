@@ -14,4 +14,4 @@ env:
     - FOLDER=lab6
 
 script:
-  ./travis_script.sh
+  - ./travis_script.sh
