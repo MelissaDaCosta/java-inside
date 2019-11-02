@@ -2,7 +2,7 @@ language: java
 jdk: openjdk13
 
 os:
-- linux
+  - linux
 
 env:
   matrix:
@@ -14,10 +14,11 @@ env:
     - FOLDER=lab6
 
 script:
-  - cd $FOLDER
-  - mvn package
+  if [ "$FOLDER" = "lab6" ]; then
+      wget https://github.com/forax/java-next/releases/download/untagged-c59655314c1759142c15/jdk-14-loom-linux.tar.gz
+      tar xvf jdk-14-loom-linux.tar.gz
+      export JAVA_HOME=$(pwd)/jdk-14-loom/
+  fi
 
-  # download jdk-14
-  - wget https://github.com/forax/java-next/releases/download/untagged-c59655314c1759142c15/jdk-14-loom-linux.tar.gz
-  - tar xvf jdk-14-loom-linux.tar.gz
-  - export JAVA_HOME=/jdk-14-loom-linux/
+  cd $FOLDER
+  mvn package
