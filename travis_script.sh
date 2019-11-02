@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ev
+set -e # exit if return != 0
 if [ "$FOLDER" = "lab6" ]; then
     # download jdk-14
     wget https://github.com/forax/java-next/releases/download/untagged-c59655314c1759142c15/jdk-14-loom-linux.tar.gz

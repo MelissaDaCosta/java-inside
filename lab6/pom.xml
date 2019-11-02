@@ -52,19 +52,16 @@
   <version>3.8.0</version>
   <configuration>
     <release>14</release>
-    <compilerArgs>--enable-preview</compilerArgs>
   </configuration>
   </plugin>
   <plugin>
     <artifactId>maven-surefire-plugin</artifactId>
     <configuration>
-        <argLine>--enable-preview</argLine>
     </configuration>
  </plugin>
  <plugin>
     <artifactId>maven-failsafe-plugin</artifactId>
     <configuration>
-        <argLine>--enable-preview</argLine>
     </configuration>
 </plugin>
 <plugin>
