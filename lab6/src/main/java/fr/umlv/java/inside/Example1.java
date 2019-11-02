@@ -7,14 +7,16 @@ public class Example1 {
 
 	private final static Object lock = new Object();
 	public static void main(String[] args) {
+		
 		/*
 		var continuationScope = new ContinuationScope("hello1");
 		var continuation = new Continuation(continuationScope, ()->{
 			//synchronized(lock) {
-				Continuation.yield(continuationScope);	// Redonne la main au thread main
+			//	Continuation.yield(continuationScope);	// Redonne la main au thread main
 				
 			//}
-			System.out.println(Continuation.getCurrentContinuation(continuationScope));
+			//System.out.println(Continuation.getCurrentContinuation(continuationScope));
+			Continuation.yield(continuationScope);
 			System.out.println("hello continuation");
 		});
 		
