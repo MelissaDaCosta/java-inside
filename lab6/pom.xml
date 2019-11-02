@@ -7,6 +7,10 @@
   <version>1.0-SNAPSHOT</version>
   <name>lab6</name>
   <url>http://maven.apache.org</url>
+    <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jmh.version>1.21</jmh.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -46,24 +50,22 @@
   </dependencies>
   <build>
   <plugins>
-   <plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-compiler-plugin</artifactId>
-  <version>3.8.0</version>
-  <configuration>
-    <release>14</release>
-  </configuration>
+ <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.8.0</version>
+    <configuration>
+      <release>14</release>
+    </configuration>
   </plugin>
   <plugin>
     <artifactId>maven-surefire-plugin</artifactId>
-    <configuration>
-    </configuration>
- </plugin>
- <plugin>
+    <version>2.22.2</version>
+  </plugin>
+  <plugin>
     <artifactId>maven-failsafe-plugin</artifactId>
-    <configuration>
-    </configuration>
-</plugin>
+    <version>2.22.2</version>
+  </plugin>
 <plugin>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-shade-plugin</artifactId>
