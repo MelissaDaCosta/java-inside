@@ -3,6 +3,7 @@ jdk: openjdk13
 
 os:
   - linux
+  - osx
 
 env:
   matrix:
