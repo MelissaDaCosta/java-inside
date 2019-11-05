@@ -1,56 +1,48 @@
 package fr.umlv.java.inside.lab2;
 
-// Ne plus avoir Collectors.
-import static java.util.stream.Collectors.joining;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class MainJSON {
 
 	// 11. cache pour les méthodes
 	
-	
-	
 	  private static final ClassValue<Method[]> cache =new ClassValue<>() { //
-	  //Redéfinie la méthode car ClassValue est une classe abstraite
-	  
-	  @Override protected Method[] computeValue(Class<?> type) { return
-	  type.getMethods(); } };
+		  //Redéfinie la méthode car ClassValue est une classe abstraite
+		  
+		  @Override 
+		  protected Method[] computeValue(Class<?> type) { 
+			  return type.getMethods(); 
+		  } 
+	  };
 	 
 
-	// 12. cache pour le nom des propriétés NON FONCTIONNELLE ?
+	// 12. cache pour le nom des propriétés 
+	 
+	private static final ClassValue<Function<Object, String>> fullCache =new ClassValue<Function<Object, String>>() {
+		
+		@Override
+		protected Function<Object, String> computeValue(Class<?> type)
+		{
+			var methods = Arrays.stream(type.getMethods())
+					.filter(method -> method.isAnnotationPresent(JSONProperty.class))
+					.sorted(Comparator.comparing(Method::getName))
+					.collect(Collectors.toList());
 
-/*	  
-	private static final ClassValue<Map<Method, String>> cache =new ClassValue<>() {
-		Map<Method, String> mapCache = new HashMap<Method,String>();
-
-		// Redéfinie la méthode car ClassValue est une classe abstraite
-		@Override protected Map<Method,String>computeValue(Class<?>type){
-			 Arrays.stream(type.getMethods())
-			.filter(method->method.getName().startsWith("get"))
-			.filter(method->method.isAnnotationPresent(JSONProperty.class))
-			.sorted(Comparator.comparing(Method::getName))
-			.forEach(method->{
-				var valueAnnotation=method.getAnnotation(JSONProperty.class).value();
-				// Si la value a été remplie on prend sa valeur, sinon on prend la valeur de
-				// propertyName
-				
-				var property=valueAnnotation.isEmpty()?propertyName(method.getName()):valueAnnotation;
-			
-				mapCache.put(method,property);
-	
-		});
-		//mapCache.entrySet().stream().forEach(System.out::println);
-		return mapCache;
+			return object -> methods.stream()
+					.map(method-> "\"" + propertyName(method.getName()) + "\"" + " : \"" + callInvoke(object, method) + "\"")
+					.collect(Collectors.joining(", ", "{", "}"));
 		}
 	};
-	*/
+	
 
 	private static String propertyName(String name) {
 		return Character.toLowerCase(name.charAt(3)) + name.substring(4);
@@ -118,7 +110,7 @@ public class MainJSON {
 		
 		// 11. Avec le cache pour les méthodes :
 		
-		
+		/*
 		return Arrays.stream(cache.get(object.getClass()))
 				.filter(method->method.getName().startsWith("get"))
 				// Indique comment trier
@@ -135,23 +127,10 @@ public class MainJSON {
 					return "\""+property +"\"" + " : " + "\"" + res + "\"";
 				})				
 				.collect(joining(", ", "{", "}"));
-				
+			*/	
 		
 		// 12. cache pour le nom des propriétés
-		
-	/*
-		var st = cache.get(object.getClass()).entrySet().stream();
-		//System.out.println(cache.get(object.getClass()).entrySet());
-		return 
-			st
-			.map(mapCache->{
-				//System.out.println(mapCache.toString());
-				var res = callInvoke(object, mapCache.getKey());
-				//System.out.println(mapCache.getValue()+ " " + res); 
-				return "\""+mapCache.getValue() +"\"" + " : " + "\"" + res + "\"";
-				}).collect(joining(", ", "{", "}"));
-				
-				*/
+		return fullCache.get(object.getClass()).apply(object);
 	}
 
 	public static void main(String[] args) {

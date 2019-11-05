@@ -70,7 +70,7 @@ public class TestJSON {
 
 	}
 	
-	
+	@Test
 	public void testIllegalArgumentException() {
 		assertThrows(IllegalArgumentException.class, ()->MainJSON.toJSON(new Alien("mars", -2)));
 
