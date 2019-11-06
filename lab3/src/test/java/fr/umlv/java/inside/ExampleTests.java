@@ -13,6 +13,7 @@ import javax.print.attribute.IntegerSyntax;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+
 public class ExampleTests {
 
 	@Tag("Q3")
@@ -78,7 +79,7 @@ public class ExampleTests {
 		
 	}
 
-	@Tag("Q10")
+	@Tag("Q8")
 	@Test
 	public void anInstanceHelloAsType() throws Throwable{
 		var lookup = MethodHandles.lookup();	// donne le lookup courant
@@ -129,6 +130,35 @@ public class ExampleTests {
 		assertEquals(1, (int) execution.invokeExact("foo"));
 		
 		assertEquals(-1, (int) execution.invokeExact("pasfoo"));
+		
+	}
+		
+	@Test
+	public void revisions() throws Throwable {
+		/*
+		var lookup = MethodHandles.lookup();
+		var privatelookup = MethodHandles.privateLookupIn(Example.class, lookup);
+		//var met1 = privatelookup.findVirtual(Example.class, "anInstanceHello", MethodType.methodType(String.class, int.class));
+		var met1 = privatelookup.findStatic(Example.class, "aStaticHello", MethodType.methodType(String.class, int.class));
+		var expected = "question 42";
+		var met = met1.asType(MethodType.methodType(String.class, Integer.class));
+		var met2 = MethodHandles.insertArguments(met, 0, Integer.valueOf(42));
+		*/
+		
+		var lookup = MethodHandles.lookup();
+		var met = lookup.findVirtual(String.class, "equals", MethodType.methodType(boolean.class, Object.class));
+	//	var test1 = met.asType(methodType(boolean.class, Object.class, Object.class));
+		//var test = MethodHandles.insertArguments(test1, 1, "foo");
+		
+		var fallback1 = MethodHandles.constant(int.class, -1);
+		var target1 = MethodHandles.constant(int.class, 1);
+		var fallback2 = MethodHandles.dropArguments(fallback1, 0, String.class);
+		var target2 = MethodHandles.dropArguments(target1, 0, String.class);
+		var fallback = MethodHandles.dropArguments(fallback2, 1, Object.class);
+		var target = MethodHandles.dropArguments(target2, 1, Object.class);
+		var guard = MethodHandles.guardWithTest(met, target, fallback);
+		var exec = MethodHandles.insertArguments(guard, 1, "foo");
+		assertEquals(1, (int) exec.invokeExact("foo"));
 		
 	}
 }

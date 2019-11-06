@@ -130,7 +130,8 @@ public class MainJSON {
 			*/	
 		
 		// 12. cache pour le nom des propriétés
-		return fullCache.get(object.getClass()).apply(object);
+		return fullCache.get(object.getClass())	// retourne Function qui prend un Object et retourne String
+				.apply(object);
 	}
 
 	public static void main(String[] args) {
