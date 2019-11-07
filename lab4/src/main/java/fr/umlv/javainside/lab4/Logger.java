@@ -45,12 +45,14 @@ public interface Logger {
 		MethodHandle methodhandle;
 		try {
 			// (Consumer, Object) void, Consumer = this
+			// Consumer ne retourne rien (void.class)et prend qlqchose (Object.class)
 			methodhandle = lookup.findVirtual(Consumer.class, "accept", methodType(void.class, Object.class));
 		}catch(IllegalAccessException | NoSuchMethodException e) {
 			throw new AssertionError(e);
 		}
+		    // On appelle accept avec : consumer.accept. Donc on ajoute l'argument consumer
 			methodhandle = MethodHandles.insertArguments(methodhandle, 0, consumer);	// == methodhandle.bindTo(consumer)
-			// On veut (String) void
+			// On veut que le consumer prenne des string (String) void
 			methodhandle = methodhandle.asType(methodType(void.class, String.class));
 			return methodhandle;		
 	}
@@ -80,19 +82,22 @@ public interface Logger {
 	// 7.
 		
 	private static MethodHandle createLoggingMethodHandle(Class<?> declaringClass, Consumer<? super String> consumer) {
-		MethodHandle mh;
-		MethodHandle mhTest;
+		MethodHandle methodHandleAccept;
+		MethodHandle methodHandleTest;
 		var lookup = MethodHandles.lookup();
 		try {
-			mhTest = ENABLE_CALLSITES.get(declaringClass).dynamicInvoker();
-			mh = lookup.findVirtual(Consumer.class, "accept", methodType(void.class, Object.class));
+		    methodHandleTest = ENABLE_CALLSITES.get(declaringClass).dynamicInvoker();
+			methodHandleAccept = lookup.findVirtual(Consumer.class, "accept", methodType(void.class, Object.class));
 
 		} catch (NoSuchMethodException | IllegalAccessException e) {
 			throw new AssertionError(e);
 		}
-		mh = mh.bindTo(consumer);
-		mh = mh.asType(methodType(void.class, String.class));
-		return MethodHandles.guardWithTest(mhTest, mh, MethodHandles.empty(methodType(void.class, String.class)));
+		methodHandleAccept = methodHandleAccept.bindTo(consumer);
+		// == methodhandle = MethodHandles.insertArguments(methodhandle, 0, consumer);   
+		
+		methodHandleAccept = methodHandleAccept.asType(methodType(void.class, String.class));
+		var fallback = MethodHandles.empty(methodType(void.class, String.class));
+		return MethodHandles.guardWithTest(methodHandleTest, methodHandleAccept, fallback);
 	}
 
 	
@@ -102,10 +107,22 @@ public interface Logger {
 		    return new MutableCallSite(MethodHandles.constant(boolean.class, true));
 		  }
 		};
-
+		
+	/*
 	public static void enable(Class<?> declaringClass, boolean enable) {
 		// update MethodHandles.constant(boolean.class, true) 
 		// into MethodHandles.constant(boolean.class, enable)
 		  ENABLE_CALLSITES.get(declaringClass).setTarget(MethodHandles.constant(boolean.class, enable));
 		}
+	*/
+	
+		/*
+		 * La classe MutableCallSite est asynchrone. Un modification peut
+          ne pas être prise en compte par les autres Threads : syncAll pour forcer les threads à maj leurs valeurs
+		 */
+	public static void enable(Class<?> declaringClass, boolean enable) {
+	  MutableCallSite mutableCallSites[] = new MutableCallSite[] {ENABLE_CALLSITES.get(declaringClass)};
+	  MutableCallSite.syncAll(mutableCallSites);   // Pour que ca fonctionne avec plusieurs threads
+	  mutableCallSites[0].setTarget(MethodHandles.constant(boolean.class, enable));
+  }
 }

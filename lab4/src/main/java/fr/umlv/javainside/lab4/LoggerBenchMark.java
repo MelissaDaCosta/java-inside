@@ -15,11 +15,11 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
-@Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)  // Code exécuté "à blanc" -> pour allouer les ressources nécéssaire pour exécuter les tests
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
-@Fork(3)
+@Fork(3)    // 3 processus vont exécuter les tests
 @BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)   // Unité de mesure du temps des tests
 @State(Scope.Benchmark)
 public class LoggerBenchMark {
 	

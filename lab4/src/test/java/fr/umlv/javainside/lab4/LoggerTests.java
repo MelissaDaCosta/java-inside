@@ -26,13 +26,13 @@ public class LoggerTests {
 
 	
 	@Test
-	void testLog() {
+	public void testLog() {
 		Foo.LOGGER.log("test");
 		assertEquals("test", Foo.STRING_BUILDER.toString());
 	}
 	
 	@Test
-	void testOfNull() {
+	public void testOfNull() {
 		assertAll(
 				()->assertThrows(NullPointerException.class, ()-> Logger.of(null, (msg)->{}).log("")),
 				()->assertThrows(NullPointerException.class, ()->Logger.of(Foo.class, null).log(""))
@@ -40,23 +40,24 @@ public class LoggerTests {
 	}
 	
 	@Test
-	void testLogNull() {
+	public void testLogNull() {
 		assertThrows(NullPointerException.class, ()-> Logger.of(Foo.class, (msg)->{}).log(null));
 
 	}
-
-	// 10.
+	
+	// 7.
 	
 	@Test
-	void testThreeLoggers1() {
-		// émet un message :
-		Bar.LOGGER.log("message");
-		assertEquals("message", Bar.STRING_BUILDER.toString());
-		// n'émet pas de message :
-		assertThrows(NullPointerException.class, ()-> Logger.fastOf(Bar.class, (msg)->{}).log(null));
-		// n'est pas enable : disable
-		Logger.enable(Bar.class, false);
-
+	public void testDisableLogger() {
+	  Logger.enable(Bar.class, false); // disable logger
+	  Bar.LOGGER.log("testDisableLogger");
+	  assertEquals("", Bar.STRING_BUILDER.toString());
 	}
 	
+	@Test
+    public void testEnableLogger() {
+      Logger.enable(Foo.class, true); // enable logger
+      Foo.LOGGER.log("testEnableLogger");
+      assertEquals("testEnableLogger", Foo.STRING_BUILDER.toString());
+    }	
 }
