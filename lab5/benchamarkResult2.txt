@@ -1,0 +1,150 @@
+# JMH version: 1.21
+# VM version: JDK 13.0.1, OpenJDK 64-Bit Server VM, 13.0.1+9-Ubuntu-218.04
+# VM invoker: /usr/lib/jvm/java-13-openjdk-amd64/bin/java
+# VM options: --enable-preview
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: fr.umlv.java.inside.StringSwitchBenchmark.stringSwitch1
+
+# Run progress: 0,00% complete, ETA 00:01:30
+# Fork: 1 of 3
+# Warmup Iteration   1: 0,003 s/op
+# Warmup Iteration   2: 0,003 s/op
+# Warmup Iteration   3: 0,003 s/op
+# Warmup Iteration   4: 0,003 s/op
+# Warmup Iteration   5: 0,003 s/op
+Iteration   1: 0,003 s/op
+Iteration   2: 0,003 s/op
+Iteration   3: 0,003 s/op
+Iteration   4: 0,003 s/op
+Iteration   5: 0,003 s/op
+
+# Run progress: 11,11% complete, ETA 00:01:22
+# Fork: 2 of 3
+# Warmup Iteration   1: 0,003 s/op
+# Warmup Iteration   2: 0,003 s/op
+# Warmup Iteration   3: 0,003 s/op
+# Warmup Iteration   4: 0,003 s/op
+# Warmup Iteration   5: 0,003 s/op
+Iteration   1: 0,003 s/op
+Iteration   2: 0,003 s/op
+Iteration   3: 0,003 s/op
+Iteration   4: 0,003 s/op
+Iteration   5: 0,003 s/op
+
+# Run progress: 22,22% complete, ETA 00:01:12
+# Fork: 3 of 3
+# Warmup Iteration   1: 0,001 s/op
+# Warmup Iteration   2: 0,001 s/op
+# Warmup Iteration   3: 0,001 s/op
+# Warmup Iteration   4: 0,002 s/op
+# Warmup Iteration   5: 0,001 s/op
+Iteration   1: 0,001 s/op
+Iteration   2: 0,002 s/op
+Iteration   3: 0,001 s/op
+Iteration   4: 0,002 s/op
+Iteration   5: 0,001 s/op
+
+
+Result "fr.umlv.java.inside.StringSwitchBenchmark.stringSwitch1":
+  0,003 ±(99.9%) 0,001 s/op [Average]
+  (min, avg, max) = (0,001, 0,003, 0,003), stdev = 0,001
+  CI (99.9%): [0,002, 0,003] (assumes normal distribution)
+
+
+# JMH version: 1.21
+# VM version: JDK 13.0.1, OpenJDK 64-Bit Server VM, 13.0.1+9-Ubuntu-218.04
+# VM invoker: /usr/lib/jvm/java-13-openjdk-amd64/bin/java
+# VM options: --enable-preview
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: fr.umlv.java.inside.StringSwitchBenchmark.stringSwitch2
+
+# Run progress: 33,33% complete, ETA 00:01:02
+# Fork: 1 of 3
+# Warmup Iteration   1: 2,218 s/op
+# Warmup Iteration   2: 1,890 s/op
+# Warmup Iteration   3: 1,956 s/op
+# Warmup Iteration   4: 2,005 s/op
+# Warmup Iteration   5: 1,833 s/op
+Iteration   1: 1,745 s/op
+Iteration   2: 1,761 s/op
+Iteration   3: 1,688 s/op
+Iteration   4: 1,761 s/op
+Iteration   5: 1,698 s/op
+
+# Run progress: 44,44% complete, ETA 00:01:02
+# Fork: 2 of 3
+# Warmup Iteration   1: 2,042 s/op
+# Warmup Iteration   2: 1,624 s/op
+# Warmup Iteration   3: 1,680 s/op
+# Warmup Iteration   4: 1,644 s/op
+# Warmup Iteration   5: 1,669 s/op
+Iteration   1: 1,600 s/op
+Iteration   2: 1,664 s/op
+Iteration   3: 1,664 s/op
+Iteration   4: 1,644 s/op
+Iteration   5: 1,604 s/op
+
+# Run progress: 55,56% complete, ETA 00:00:53
+# Fork: 3 of 3
+# Warmup Iteration   1: 2,229 s/op
+# Warmup Iteration   2: 1,948 s/op
+# Warmup Iteration   3: 1,872 s/op
+# Warmup Iteration   4: 1,875 s/op
+# Warmup Iteration   5: 2,022 s/op
+Iteration   1: 2,030 s/op
+Iteration   2: 1,821 s/op
+Iteration   3: 1,736 s/op
+Iteration   4: 1,953 s/op
+Iteration   5: 1,890 s/op
+
+
+Result "fr.umlv.java.inside.StringSwitchBenchmark.stringSwitch2":
+  1,751 ±(99.9%) 0,134 s/op [Average]
+  (min, avg, max) = (1,600, 1,751, 2,030), stdev = 0,126
+  CI (99.9%): [1,616, 1,885] (assumes normal distribution)
+
+
+# JMH version: 1.21
+# VM version: JDK 13.0.1, OpenJDK 64-Bit Server VM, 13.0.1+9-Ubuntu-218.04
+# VM invoker: /usr/lib/jvm/java-13-openjdk-amd64/bin/java
+# VM options: --enable-preview
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: fr.umlv.java.inside.StringSwitchBenchmark.stringSwitch3
+
+# Run progress: 66,67% complete, ETA 00:00:43
+# Fork: 1 of 3
+# Warmup Iteration   1: 13,202 s/op
+# Warmup Iteration   2: 34,628 s/op
+# Warmup Iteration   3: 33,060 s/op
+# Warmup Iteration   4: 31,234 s/op
+# Warmup Iteration   5: 33,794 s/op
+Iteration   1: 34,091 s/op
+Iteration   2: 35,014 s/op
+Iteration   3: 32,544 s/op
+Iteration   4: 33,719 s/op
+Iteration   5: 33,842 s/op
+
+# Run progress: 77,78% complete, ETA 00:01:54
+# Fork: 2 of 3
+# Warmup Iteration   1: 12,765 s/op
+# Warmup Iteration   2: 33,237 s/op
+# Warmup Iteration   3: 35,543 s/op
+# Warmup Iteration   4: 37,961 s/op
+# Warmup Iteration   5: 33,627 s/op
+Iteration   1: 30,394 s/op
+Iteration   2: 36,285 s/op
+Iteration   3: 37,740 s/op
+Iteration   4: 36,958 s/op
+Iteration   5: 

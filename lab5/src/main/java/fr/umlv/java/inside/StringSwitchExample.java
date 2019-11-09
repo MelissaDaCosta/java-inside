@@ -18,7 +18,7 @@ public class StringSwitchExample {
 
 	private static final MethodHandle STRING_EQUALS;
 
-	// bloc static pour être appelée une fois
+	// bloc static pour être appelée une fois au chargement de la classe
 	static {
 		var lookup = MethodHandles.lookup();
 		try {
@@ -52,7 +52,7 @@ public class StringSwitchExample {
 		var fallback = constant(int.class, -1); // Constante qui vaut -1
 		fallback = dropArguments(fallback, 0, String.class); // Retire a l'éxécution la String donnée au test
 
-		var execution = fallback; // Si aucun argument (on ne passe pas la boucle fo)r -> renvoie constante
+		var execution = fallback; // Si aucun argument (on ne passe pas la boucle for) -> renvoie constante
 									// fallback -1
 
 		for (var i = 0; i < strings.length; i++) {
@@ -62,15 +62,15 @@ public class StringSwitchExample {
 
 			// string.equals(argument ajoutée qui est strings[i] le varargs)
 			var test = insertArguments(STRING_EQUALS, 1, strings[i]);
-			execution = guardWithTest(test, target, execution);
+			execution = guardWithTest(test, target, execution);  
+			// fallback = execution jusqu'à ce qu'on ait terminé de faire des tours de boucle for
 		}
 		return execution;
 	}
 
 	// switch 2 qui utilise method handle
 	public static int stringSwitch2(String string) {
-		var mh = createMHFromStrings2("foo", "bar", "bazz");
-
+	  var mh = createMHFromStrings2("foo", "bar", "bazz");
 		try {
 			return (int) mh.invokeExact(string); // appelle la méthode equals
 
@@ -81,6 +81,8 @@ public class StringSwitchExample {
 		}
 	}
 
+	/*************************** INLINING CACHE ***********************************/
+	
 	// switch 3 pour utilise inling cache
 	public static int stringSwitch3(String string) {
 		var mh = createMHFromStrings3("foo", "bar", "bazz");
@@ -103,10 +105,11 @@ public class StringSwitchExample {
 	static class InliningCache extends MutableCallSite {
 		private static final MethodHandle SLOW_PATH;
 
+		// bloc static pour être appelée une fois au chargement de la classe
 		static {
 			var lookup = MethodHandles.lookup();
 			try {
-				// Récupère la méthode slowPath de la classe InliningCache qui renvoie un int et prend un String
+				// Récupère la méthode slowPath de la classe InliningCache (que l'on a créée) qui renvoie un int et prend un String
 				SLOW_PATH = lookup.findVirtual(InliningCache.class, "slowPath",
 						MethodType.methodType(int.class, String.class));
 			} catch (NoSuchMethodException | IllegalAccessException e) {
@@ -114,7 +117,7 @@ public class StringSwitchExample {
 			}
 		}
 
-		private final List<String> matches; // List des paramètres
+		private final List<String> matches; // List des paramètres données à createMHFromStrings3
 
 		private InliningCache(String... matches) {	//  On le met private dans un second temps
 			/*
@@ -132,16 +135,17 @@ public class StringSwitchExample {
 		// Autre constructeur pour le second arbre :
 		public InliningCache(List<String> matches) {
 			super(MethodType.methodType(int.class, String.class));	// Appelle le constructeur de MutableCallSite
+			// public MutableCallSite(MethodType type)
 			// Crée un MutableCallSite vierge avec un type de retour int et un argument String
 			this.matches = matches;
 			// maj le MutableCallSite pour qu'il devienne un MethodHandle
 			// de la méthode slowPath avec l'argument this passé en position 0
-			setTarget(MethodHandles.insertArguments(SLOW_PATH, 0, this));
+			setTarget(MethodHandles.insertArguments(SLOW_PATH, 0, this));    
 		}
 
 		private int slowPath(String value) {
 			// var index = stringSwitch2(s);
-			var index = matches.indexOf(value);
+			var index = matches.indexOf(value);  // récupère l'index de value dans le tableau matches
 
 			// On veut changer l'arbre :
 			var test = insertArguments(STRING_EQUALS, 1, value);	// Appelle equals avec la value donnée
@@ -152,6 +156,8 @@ public class StringSwitchExample {
 			//var mh = MethodHandles.guardWithTest(test, target, getTarget());
 			// Dans un second temps :
 			var mh = MethodHandles.guardWithTest(test, target, new InliningCache(matches).dynamicInvoker());
+			// appelle constructeur private de la classe InliningCache
+			// dynamicInvoker produit un MethodHandle
 			// si guardWithTest rate : setTarget du getTarget -> ne change rien
 			setTarget(mh);
 
@@ -159,7 +165,6 @@ public class StringSwitchExample {
 
 		}
 	}
-
 }
 
 /*

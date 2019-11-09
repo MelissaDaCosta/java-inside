@@ -25,15 +25,18 @@ public class StringSwitchExampleTests {
 	// Tests Paramétrés :
 
 	@ParameterizedTest
-	@MethodSource("testWithMultipleMethods") // Méthode à appeler
+	@MethodSource("testWithMultipleMethods") // Factory méthode a appeler qui fournie une stream contenant 
+	// plusieurs interfaces ToIntFunction (donnée en argument).
+	// Chaque interface fonctionnelle de ce stream correspond à une fonction qui sera appeler une par une par cette méthode de test.
 	/*
 	 * Cette méthode va effectuer le assertAll pour chaque fonction stocker dans le
 	 * Stream renvoyer par testWithMultipleMethods.
 	 */
 	public void multipleMethod(ToIntFunction<String> function) {
-		assertAll(() -> assertEquals(0, function.applyAsInt("foo")), () -> assertEquals(1, function.applyAsInt("bar")),
-				() -> assertEquals(2, function.applyAsInt("bazz")),
-				() -> assertEquals(-1, function.applyAsInt("autre")));
+		assertAll(() -> assertEquals(0, function.applyAsInt("foo")), 
+		          () -> assertEquals(1, function.applyAsInt("bar")),
+		          () -> assertEquals(2, function.applyAsInt("bazz")),
+		          () -> assertEquals(-1, function.applyAsInt("autre")));
 
 	}
 
@@ -43,7 +46,8 @@ public class StringSwitchExampleTests {
 	 * int
 	 */
 	static Stream<ToIntFunction<String>> testWithMultipleMethods() {
-		return Stream.of(StringSwitchExample::stringSwitch, StringSwitchExample::stringSwitch2,
-				StringSwitchExample::stringSwitch3); // Test plusieurs méthodes
+		return Stream.of(StringSwitchExample::stringSwitch,
+		                 StringSwitchExample::stringSwitch2,
+		                 StringSwitchExample::stringSwitch3); // Test plusieurs méthodes
 	}
 }
