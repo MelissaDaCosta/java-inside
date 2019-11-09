@@ -30,7 +30,7 @@ public class Example1 {
 		
 		var continuation1 = new Continuation(scope, () -> {
 	        System.out.println("start 1");
-	        Continuation.yield(scope);
+	        Continuation.yield(scope); // sort de la continuation
 	        System.out.println("middle 1");
 	        Continuation.yield(scope);
 	        System.out.println("end 1");
@@ -58,7 +58,7 @@ public class Example1 {
 	    	
 	      while(!deque.isEmpty()) {
 	    	  var continuation = deque.poll();	// Retire l'élément
-	    	  continuation.run();
+	    	  continuation.run(); // lance la continuation ou la relance s'il y a eu un yield, après celui-ci
 	    	  if(!continuation.isDone())
 	    		  deque.offer(continuation);	// Remettre la continuation en fin de deque
 	      }
