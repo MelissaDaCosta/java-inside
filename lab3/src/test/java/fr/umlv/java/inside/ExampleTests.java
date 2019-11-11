@@ -117,7 +117,8 @@ public class ExampleTests {
 		var methodHandleTest = lookup.findVirtual(String.class, "equals", methodType(boolean.class, Object.class));
 
 		// Supprime les arguments des constantes renvoyés car nous n'avons pas besoin 
-		// des arguments String et Class rajouté par la méthodeHandleTest lors du guardWithTest 
+		// des arguments String et Object rajoutés par la méthodeHandleTest lors du guardWithTest
+		// car quand on fait un equals : String.equals(Object)
 		var dropForTarget = MethodHandles.dropArguments(methodHandleTarget, 0, String.class, Object.class);
 		var dropForFallback = MethodHandles.dropArguments(methodHandleFallback, 0, String.class, Object.class);
 		

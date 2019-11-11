@@ -1,6 +1,5 @@
 package fr.umlv.javainside.lab4;
 
-import static java.lang.invoke.MethodHandles.insertArguments;
 import static java.lang.invoke.MethodType.methodType;
 
 import java.lang.invoke.MethodHandle;
@@ -87,14 +86,18 @@ public interface Logger {
 		var lookup = MethodHandles.lookup();
 		try {
 		    methodHandleTest = ENABLE_CALLSITES.get(declaringClass).dynamicInvoker();
+		    // (Consumer, Object) void, Consumer = this
+            // Consumer ne retourne rien (void.class)et prend qlqchose (Object.class)
 			methodHandleAccept = lookup.findVirtual(Consumer.class, "accept", methodType(void.class, Object.class));
 
 		} catch (NoSuchMethodException | IllegalAccessException e) {
 			throw new AssertionError(e);
 		}
+		// On appelle accept avec : consumer.accept. Donc on ajoute l'argument consumer
 		methodHandleAccept = methodHandleAccept.bindTo(consumer);
 		// == methodhandle = MethodHandles.insertArguments(methodhandle, 0, consumer);   
 		
+		// On veut que le consumer prenne des string (String) void
 		methodHandleAccept = methodHandleAccept.asType(methodType(void.class, String.class));
 		var fallback = MethodHandles.empty(methodType(void.class, String.class));
 		return MethodHandles.guardWithTest(methodHandleTest, methodHandleAccept, fallback);

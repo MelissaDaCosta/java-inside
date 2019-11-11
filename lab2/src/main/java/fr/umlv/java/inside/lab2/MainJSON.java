@@ -68,7 +68,7 @@ public class MainJSON {
 			throw new IllegalStateException(e);
 		} catch (InvocationTargetException e) {
 			var cause = e.getCause();
-			if (cause instanceof RuntimeException)
+			if (cause instanceof RuntimeException)   // uncehcked exception : faute du programmeur -> à gérer 
 				throw (RuntimeException) cause; // Re-propage l'exception
 			if (cause instanceof Error)
 				throw (Error) cause;

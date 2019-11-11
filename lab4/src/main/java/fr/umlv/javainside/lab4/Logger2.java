@@ -18,12 +18,13 @@ public interface Logger2 {
   
     static enum LEVEL{DEBUG, WARNING, ERROR} ;
     
-	public void log(String message);
+    public default void log(String message) {
+      log(message, LEVEL.WARNING);
+    }
 	
 	public void log(String message, LEVEL level);
 	  
 	
-
 	public static Logger2 of(Class<?> declaringClass, BiConsumer<? super String, Logger2.LEVEL> biconsumer) {
 		Objects.requireNonNull(declaringClass);
 		Objects.requireNonNull(biconsumer);
@@ -54,6 +55,27 @@ public interface Logger2 {
           };
 		};
 	}
+	
+	public static Logger2 fastOf(Class<?> declaringClass, BiConsumer<? super String, Logger2.LEVEL> biconsumer) {
+      Objects.requireNonNull(declaringClass);
+      Objects.requireNonNull(biconsumer);
+      var mh = createLoggingMethodHandle(declaringClass, biconsumer);
+      // <=> méthode log
+      return (message, level)->{
+          Objects.requireNonNull(message);
+          try {
+              mh.invokeExact(message);
+          } catch (Throwable t) {
+              if (t instanceof RuntimeException) {
+                  throw (RuntimeException) t;
+              }
+              if (t instanceof Error) {
+                  throw (Error) t;
+              }
+              throw new UndeclaredThrowableException(t);
+          }
+      };
+  }
 	
 	static final ClassValue<MutableCallSite> ADD_LEVEL = new ClassValue<MutableCallSite>() {
       

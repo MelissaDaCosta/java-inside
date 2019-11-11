@@ -159,7 +159,7 @@ public class StringSwitchExample {
 			// appelle constructeur private de la classe InliningCache
 			// dynamicInvoker produit un MethodHandle
 			// si guardWithTest rate : setTarget du getTarget -> ne change rien
-			setTarget(mh);
+			setTarget(mh);   // maj avec le nouveau method handle
 
 			return index;
 
